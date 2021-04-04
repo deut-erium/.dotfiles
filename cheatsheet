@@ -1,0 +1,117 @@
+#HELP
+: TAB - Cycle through possible command completions
+: CTRL-d list possible command completitons
+
+# Variables
+:set - show set non default variables
+:set foo&  - set foo to default value
+:set foo?  - show value of foo
+
+# word and line completion
+In insert mode
+ctrl-n, ctrl-p next/prev word completion
+ctrl-x, ctrl-l  line completion
+ctrl-x, ctrl-k  dictionary
+ctrl-w  erases word
+ctrl-u erases line
+
+# Searching
+/pattern  search forward
+?pattern search backward
+n next forward
+N repeat backward
+
+:set ignorecase case insensitive
+:set smartcase - use case if any caps used
+:set incsearch - show match as search proceeds
+:set hlsearch - search highlighting
+
+* search for word under cursor
+g* search for partial word under cursor
+ctrl-o, ctrl-i jump through cursor locations
+
+# Markers
+mk - mark current position
+'k - move to mark k
+d'k delete from current position to mark k
+
+# indenting
+        hello
+:set tabstop=8   tabs are at proper location
+:set expandtab - dont use actual tab char
+:set shiftwidth=4  indenting 4 spaces
+:set autoindent   autoindent
+:set smartindent  does the right things mostly
+
+ctrl-t,ctrl-d in insert, indent current line forward or backward
+visual > or < - indent block
+= correct allignment of code
+V= select text, then reformat with =
+== reformat current line
+gq reformat paragarph
+
+:set pastetoggle=<f5>
+
+# multiple windows
+:e filename
+:split filename
+ctrl-w up
+ctrl-w ctrl-w cycle
+:vsplit file
+:sview file
+:hide
+:only
+:ls
+:b 2
+
+# tags
+:tag TAB
+:tag function_name
+
+ihello^Mhello^Mhello^Mhello^[<80>ýaa^M^[<80>ýa
+
+# registers
+qk - records edits into register k
+@k execute recorded edits macro
+@@ repeat the last one
+5@@ repeat 5 times
+"kp print macrk k
+
+SHIFT-o  open a line above
+ESC-o open a line below
+help holy-grail
+~ caps
+g; shift cursor to prev pos
+123gg or 123G jumps to line 123
+gg jump beginning of file
+G jump end of file
+r !<bash command> reads the output of bash command at the cursor
+set mouse=a (use shift to use terminal selection)
+:echo printf("%x",1234) string formatting and conversions
+
+
+:find command to find a file in the subdirectory
+set path+=**
+
+:b asd   for autocomplete open buffer
+:ctrl-x ctrl-f file completion in the current directory
+:ctags  ctrl-]
+
+
+## Windows Tabs
+<Ctrl-W>+v  new vertical split
+<Ctrl-W>+s  new horizontal split
+<Ctrl-W>+c closes window
+<Ctrl-W> hjkl window movement
+<Ctrl-W> _ maximise current window
+<Ctrl-W> = equate current window
+<Ctrl-W> +- increase/decrease current window size
+
+
+:tabnew open in new tab
+:tabclose
+:tabnext
+:tabprevious
+
+
+~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                 
