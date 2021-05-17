@@ -114,4 +114,45 @@ set path+=**
 :tabprevious
 
 
+# Tmux
+$ rename session
+d detach from session
+s show all sessions
+a attach session
+( previous session
+) next session
+c create window
+, rename current window
+& close current window
+p previous window
+n next window
+0..9 switch to window number
+v vertical pane split
+s horizontal pane split
+{ pane left
+} pane right
+spacebar toggle pane layouts
+o next pane
+z toggle pane zoom ****
+! convert pane to window
+ctrl+dirn resize current pane
+x close current pane
+[ copy mode
+] paste contents of buffer_0
+? show shortcuts
+f find window
+
+
+:show-buffer
+:capture-pane
+:list-buffers
+:choose-buffer
+:save-buffer buf.txt
+:delete-buffer -b 1
+
+
+
+
+
+
 ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                 
