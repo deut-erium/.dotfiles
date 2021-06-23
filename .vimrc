@@ -107,6 +107,7 @@ au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
 Plugin 'klen/python-mode'
 Plugin 'junegunn/fzf.vim'
 Plugin 'dusans/vim-hardmode'
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " Plugin 'vim-scripts/indentpython.vim'
 " Plugin 'vim-syntastic/syntastic'
 call vundle#end()
