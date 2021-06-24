@@ -106,10 +106,29 @@ au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
 
 Plugin 'klen/python-mode'
 Plugin 'junegunn/fzf.vim'
-Plugin 'dusans/vim-hardmode'
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " Plugin 'vim-scripts/indentpython.vim'
 " Plugin 'vim-syntastic/syntastic'
 call vundle#end()
 filetype plugin indent on
 
+let mapleader = "," " map leader to comma
+
+function! ToggleLineNumber()
+    if v:version > 703
+        if (!&relativenumber && !&number)
+            set number
+        elseif (!&relativenumber && &number)
+            set relativenumber
+        elseif (&relativenumber && &number)
+            set nonumber
+        else
+            set norelativenumber
+        endif
+    else 
+        set number!
+    endif
+endfunction
+
+map <leader>r :call ToggleLineNumber()<CR>
+set number
+set relativenumber
