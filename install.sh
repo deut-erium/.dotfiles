@@ -37,6 +37,7 @@ pip3 install tqdm \
       sklearn \
       autopep8
 
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # docker pull hyperreality/cryptohack
 # docker pull razaborg/rsactftool
 # cyrilbouvier/cado-nfs.py`
