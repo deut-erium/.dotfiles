@@ -37,17 +37,20 @@ apt-get install -y \
     nasm \
     fasm \
     radare2 \
-    exif
+    exif \
+    cython \
+    swig \
+    cmake
 
 
 
 
 sudo apt-get install -y docker \
       docker-compose \
-      default-jre \
-      default-jdk \
-      maven \
-      gradle 
+      # default-jre \
+      # default-jdk \
+      # maven \
+      # gradle 
 
 
 pip3 install tqdm \
@@ -56,7 +59,23 @@ pip3 install tqdm \
       sympy \
       pwntools \
       pycryptodome \
-      fastecdsa \
+      # fastecdsa \
+      beautifulsoup4 \
+      factordb-python \
+      grequests \
+      numpy \
+      pandas \
+      pillow \
+      matplotlib \
+      scipy \
+      sklearn \
+      autopep8
+
+python3.9 -m pip install tqdm \
+      z3-solver \
+      sympy \
+      pwntools \
+      pycryptodome \
       beautifulsoup4 \
       factordb-python \
       grequests \
@@ -75,8 +94,15 @@ pypy3 -m pip install \
     pycryptodome \
     numpy \
     pillow \
-    pysmt 
+    pysmt \
+    python-sat
 
+echo y | pysmt-install --msat
+echo y | pysmt-install --cvc4
+echo y | pysmt-install --yices
+echo y | pysmt-install --btor
+echo y | pysmt-install --picosat
+echo y | pysmt-install --bdd
 # docker pull hyperreality/cryptohack
 # docker pull razaborg/rsactftool
 # cyrilbouvier/cado-nfs.py`
@@ -84,3 +110,11 @@ pypy3 -m pip install \
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
 # cython swig cmake
 
+# apt-get install -y bc binutils bzip2 ca-certificates cliquer curl eclib-tools fflas-ffpack flintqs g++ g++ gcc gcc gfan gfortran glpk-utils gmp-ecm lcalc libatomic-ops-dev libboost-dev libbraiding-dev libbrial-dev libbrial-groebner-dev libbz2-dev libcdd-dev libcdd-tools libcliquer-dev libcurl4-openssl-dev libec-dev libecm-dev libffi-dev libflint-arb-dev libflint-dev libfreetype6-dev libgc-dev libgd-dev libgf2x-dev libgiac-dev libgivaro-dev libglpk-dev libgmp-dev libgsl-dev libhomfly-dev libiml-dev liblfunction-dev liblrcalc-dev liblzma-dev libm4rie-dev libmpc-dev libmpfi-dev libmpfr-dev libncurses5-dev libntl-dev libopenblas-dev libpari-dev libpcre3-dev libplanarity-dev libppl-dev libpython3-dev libreadline-dev librw-dev libsqlite3-dev libssl-dev libsuitesparse-dev libsymmetrica2-dev libz-dev libzmq3-dev libzn-poly-dev m4 make nauty openssl palp pari-doc pari-elldata pari-galdata pari-galpol pari-gp2c pari-seadata patch perl pkg-config planarity ppl-dev python3 python3 python3-distutils r-base-dev r-cran-lattice sqlite3 sympow tachyon tar xcas xz-utils yasm
+
+# wget http://www.mirrorservice.org/sites/www.sagemath.org/src/sage-9.3.tar.gz
+# tar -xvf sage-9.3.tar.gz
+# cd sage-9.3/
+# MAKE='make -j16' make
+# ./configure && make
+# ln -s $(pwd)/sage /usr/bin/sage
