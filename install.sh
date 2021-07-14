@@ -5,13 +5,29 @@ apt-get -y update && apt-get -y upgrade && \
       sudo \
       zip \
       p7zip \
-      vim
+      vim \
+      tmux
+
+export DEBIAN_FRONTEND=noninteractive; \
+    export DEBCONF_NONINTERACTIVE_SEEN=true; \
+    echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
+    echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
+    apt-get update -qqy \
+ && apt-get install -qqy --no-install-recommends \
+        tzdata \
+ && apt-get clean \
+# && rm -rf /var/lib/apt/lists/*
+
+apt install -y software-properties-common
+apt-get install -y software-properties-common
 
 add-apt-repository -y ppa:deadsnakes/ppa ppa:pypy/ppa
 apt-get install -y python3.9 python3-pip
 
-apt-get install -y libgmp3-dev libmpfr-dev libmpc-dev
 apt-get install -y \
+    libgmp3-dev \
+    libmpfr-dev \
+    libmpc-dev \
     pypy3 \
     gdb \
     # sagemath-common \
@@ -28,7 +44,6 @@ apt-get install -y \
 
 sudo apt-get install -y docker \
       docker-compose \
-      tmux \
       default-jre \
       default-jdk \
       maven \
@@ -60,9 +75,12 @@ pypy3 -m pip install \
     pycryptodome \
     numpy \
     pillow \
+    pysmt 
 
-
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # docker pull hyperreality/cryptohack
 # docker pull razaborg/rsactftool
 # cyrilbouvier/cado-nfs.py`
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall
+# cython swig cmake
+
