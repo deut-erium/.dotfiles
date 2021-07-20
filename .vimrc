@@ -104,8 +104,10 @@ Plugin 'tpope/vim-commentary'
 autocmd FileType python setlocal commentstring=#\ %s
 au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
 
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 " Plugin 'vim-scripts/indentpython.vim'
 " Plugin 'vim-syntastic/syntastic'
 call vundle#end()
