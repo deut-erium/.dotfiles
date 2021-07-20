@@ -107,6 +107,7 @@ au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
 " Plugin 'klen/python-mode'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'tpope/vim-obsession'
 
 " Plugin 'vim-scripts/indentpython.vim'
 " Plugin 'vim-syntastic/syntastic'
@@ -130,6 +131,9 @@ function! ToggleLineNumber()
         set number!
     endif
 endfunction
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn','\%81v',100)
 
 map <leader>r :call ToggleLineNumber()<CR>
 set number
