@@ -30,6 +30,10 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 filetype off
 
+autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd BufRead *.py,*.sage set nocindent
+autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
+
 " setting path to include all
 set path+=**
 set laststatus=2
@@ -109,8 +113,10 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'tpope/vim-obsession'
 
+Plugin 'wlangstroth/vim-racket'
+
 " Plugin 'vim-scripts/indentpython.vim'
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 call vundle#end()
 filetype plugin indent on
 
@@ -131,6 +137,7 @@ function! ToggleLineNumber()
         set number!
     endif
 endfunction
+
 
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn','\%81v',100)
