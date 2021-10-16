@@ -4,7 +4,7 @@ set autoread
 set nocompatible
 set wildmode=longest,list,full
 set wildmenu
-
+set clipboard=exclude:.*
 " tabcompletion
 function! Tab_Or_Complete()
   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
