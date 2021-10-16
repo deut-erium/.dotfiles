@@ -44,6 +44,12 @@ apt-get install -y \
     pandoc \
     pylint
 
+sudo apt install \
+    fzf \
+    ripgrep \
+    universal-ctags \
+    silversearcher-ag \
+    fd-find
 
 sudo apt-get install -y pandoc \
     texlive-latex-base \
