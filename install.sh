@@ -40,7 +40,9 @@ apt-get install -y \
     exif \
     cython \
     swig \
-    cmake
+    cmake \
+    pandoc \
+    pylint
 
 
 
