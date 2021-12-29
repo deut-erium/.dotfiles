@@ -1,0 +1,9 @@
+[wsl2]
+
+memory=15GB
+
+swap=8GB
+
+processors=15
+
+nestedVirtualization=true
