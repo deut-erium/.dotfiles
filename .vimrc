@@ -153,3 +153,31 @@ call matchadd('ColorColumn','\%81v',100)
 map <leader>r :call ToggleLineNumber()<CR>
 set number
 set relativenumber
+
+" saving backups and keeping workdir clean
+set undofile
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
+set backup                        " enable backups
+set swapfile                      " enable swaps
+if has('win64') || has("win32")
+    set undodir=$HOME/vimfiles/tmp/undo     " undo files
+    set backupdir=$HOME/vimfiles/tmp/backup " backups
+    set directory=$HOME/vimfiles/tmp/swap   " swap files
+else
+    set undodir=$HOME/vimfiles/tmp/undo     " undo files
+    set backupdir=$HOME/vimfiles/tmp/backup " backups
+    set directory=$HOME/vimfiles/tmp/swap   " swap files
+endif
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
