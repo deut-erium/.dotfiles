@@ -96,8 +96,16 @@ set title
 
 set foldmethod=manual
 " Vundle stuff
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if has('win64') || has("win32")
+    set shellslash
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+    call vundle#begin('~/vimfiles/bundle')
+    set bs=2
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+endif
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'preservim/nerdtree'
