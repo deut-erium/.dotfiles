@@ -135,12 +135,34 @@ rmd4 () {
   }
 
 alias ccat='pygmentize -g'
-#export DISPLAY=$($HOME/wsldisplay.py)
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PROMPT_DIRTRIM=2
 alias apep="autopep8 --in-place --aggressive --aggressive"
-alias rdpu="sudo /etc/init.d/xrdp start"
 alias vimtricks="vim ~/.dotfiles/cheatsheet"
 alias pwdd="pwd | clip.exe"
+alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
+
+mid2mp3 () {
+    # ffmpeg -i "$1" -vn -ab 128k -ar 44100 -y "${1%.mid}.mp3";
+    timidity "$1" -Ow -o - | ffmpeg -i - -acodec libmp3lame -ab 320k "${1%.mid}.mp3"
+}
+
+cmd() {
+  CMD=$1
+  shift;
+  ARGS=$@
+  WIN_PWD=`wslpath -w "$(pwd)"`
+  cmd.exe /c "pushd ${WIN_PWD} && ${CMD} ${ARGS}"
+}
+
+VS_INSTALL_DIR=$("${VSWHERE_PATH}" -latest -property installationPath)
+VCVARS_BAT="${VS_INSTALL_DIR}\VC\Auxiliary\Build\vcvars64.bat"
+VC_DEVENV="${VS_INSTALL_DIR}\Common7\IDE\devenv.exe"
+cmd_vc() {
+    cmd.exe /V /C @ "${VCVARS_BAT}" "&&" "$@"
+}
+cmd_devenv() {
+    cmd.exe /v /c @ "${VC_DEVENV}" "&&" "$@"
+}
+
