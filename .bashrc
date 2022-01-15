@@ -156,6 +156,7 @@ cmd() {
   cmd.exe /c "pushd ${WIN_PWD} && ${CMD} ${ARGS}"
 }
 
+VSWHERE_PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe"
 VS_INSTALL_DIR=$("${VSWHERE_PATH}" -latest -property installationPath)
 VCVARS_BAT="${VS_INSTALL_DIR}\VC\Auxiliary\Build\vcvars64.bat"
 VC_DEVENV="${VS_INSTALL_DIR}\Common7\IDE\devenv.exe"
