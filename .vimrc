@@ -125,6 +125,8 @@ Plugin 'wlangstroth/vim-racket'
 
 " Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
+" for displaying num search results
+Plugin 'google/vim-searchindex' 
 call vundle#end()
 filetype plugin indent on
 
