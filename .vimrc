@@ -36,6 +36,11 @@ autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
 
 " setting path to include all
 set path+=**
+
+" preventing scan on included files on completion
+set complete-=i
+
+
 set laststatus=2
 if !has('gui_running')
   set t_Co=256
@@ -126,8 +131,30 @@ Plugin 'wlangstroth/vim-racket'
 " Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
 " for displaying num search results
-Plugin 'google/vim-searchindex' 
+Plugin 'google/vim-searchindex'
+" for usual code alignment stuff
+Plugin 'junegunn/vim-easy-align'
+
+" Better vim-diffs
+Plugin 'chrisbra/vim-diff-enhanced'
+
+
 call vundle#end()
+
+let g:syntastic_always_populate_loc_list = 1                                    
+let g:syntastic_auto_loc_list = 2                                               
+let g:syntastic_check_on_open = 0                                               
+let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_w = 0
+
+
+"" Display checker-name for that error-message                                  
+let g:syntastic_aggregate_errors = 1        
+
+"" I use the brew to install flake8                                             
+let g:syntastic_python_checkers=['flake8', 'python3']
+
+
 filetype plugin indent on
 
 let mapleader = "," " map leader to comma
