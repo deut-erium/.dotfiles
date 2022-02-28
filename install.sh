@@ -4,7 +4,7 @@ apt-get -y update && apt-get -y upgrade && \
       git \
       sudo \
       zip \
-      p7zip \
+      p7zip-full \
       vim \
       tmux
 
@@ -22,7 +22,9 @@ apt install -y software-properties-common
 apt-get install -y software-properties-common
 
 add-apt-repository -y ppa:deadsnakes/ppa ppa:pypy/ppa
-apt-get install -y python3.9 python3-pip
+apt-get install -y python3.10 python3.10-distutils libpython3.10-dev
+
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
 
 apt-get install -y \
     libgmp3-dev \
@@ -36,6 +38,7 @@ apt-get install -y \
     binwalk \
     nasm \
     fasm \
+    net-tools \
     radare2 \
     exif \
     cython \
@@ -49,7 +52,8 @@ apt install -y \
     ripgrep \
     universal-ctags \
     silversearcher-ag \
-    fd-find
+    fd-find \
+    pygmentize
 
 apt-get install -y pandoc \
     texlive-latex-base \
@@ -61,28 +65,20 @@ apt-get install -y docker \
       # default-jre \
       # default-jdk \
       # maven \
-      # gradle 
+      # gradle \
+      # firefox \
+      # firefox-geckodriver \
+      # libgtk-3-dev \
+      # libgtk2.0-dev \
+      # freeglut3-dev \
+      # ffmpeg \
+      # timidity \
 
 
-pip3 install tqdm \
-      z3-solver \
-      gmpy2 \
-      sympy \
-      pwntools \
-      pycryptodome \
-      # fastecdsa \
-      beautifulsoup4 \
-      factordb-python \
-      grequests \
-      numpy \
-      pandas \
-      pillow \
-      matplotlib \
-      scipy \
-      sklearn \
-      autopep8
 
-python3.9 -m pip install tqdm \
+        
+
+python3.10 -m pip install tqdm \
       z3-solver \
       sympy \
       pwntools \
@@ -96,7 +92,30 @@ python3.9 -m pip install tqdm \
       matplotlib \
       scipy \
       sklearn \
+      virtualenv \
       autopep8
+
+# python3.10 -m pip install \
+#     nltk \
+#     youtube-dl \
+#     pygame \
+#     tkinter \
+#     python-tk \
+#     PySimpleGUI \
+#     tensorflow \
+#     torch \
+#     torchvision \
+#     faker \
+#     # wslwinreg \ 
+#     bitarray \
+#     scikit-opt \
+#     protobuf \
+#     hvplot \
+#     bokeh \
+#     selenium \
+#     holoviews \
+#     django
+
 
 pypy3 -m pip install \
     tqdm \
@@ -108,20 +127,25 @@ pypy3 -m pip install \
     pysmt \
     python-sat
 
-echo y | pysmt-install --msat
-echo y | pysmt-install --cvc4
-echo y | pysmt-install --yices
-echo y | pysmt-install --btor
-echo y | pysmt-install --picosat
-echo y | pysmt-install --bdd
+# pysmt-install --msat --confirm-agreement
+# pysmt-install --cvc4 --confirm-agreement
+# pysmt-install --yices --confirm-agreement
+# pysmt-install --btor --confirm-agreement
+# pysmt-install --picosat --confirm-agreement
+# pysmt-install --bdd --confirm-agreement
 # docker pull hyperreality/cryptohack
 # docker pull razaborg/rsactftool
 # docker pull cyrilbouvier/cado-nfs.py`
 
+# pushd .dotfiles
+# cp -r .bashrc .gdbinit .vimrc .inputrc .tmux.conf install.sh peda ~
+# popd 
+
 # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 # vim +PluginInstall +qall
-# apt-get install -y cython swig cmake
 
+
+# sagemath stuff
 # apt-get install -y bc binutils bzip2 ca-certificates cliquer curl eclib-tools fflas-ffpack flintqs g++ g++ gcc gcc gfan gfortran glpk-utils gmp-ecm lcalc libatomic-ops-dev libboost-dev libbraiding-dev libbrial-dev libbrial-groebner-dev libbz2-dev libcdd-dev libcdd-tools libcliquer-dev libcurl4-openssl-dev libec-dev libecm-dev libffi-dev libflint-arb-dev libflint-dev libfreetype6-dev libgc-dev libgd-dev libgf2x-dev libgiac-dev libgivaro-dev libglpk-dev libgmp-dev libgsl-dev libhomfly-dev libiml-dev liblfunction-dev liblrcalc-dev liblzma-dev libm4rie-dev libmpc-dev libmpfi-dev libmpfr-dev libncurses5-dev libntl-dev libopenblas-dev libpari-dev libpcre3-dev libplanarity-dev libppl-dev libpython3-dev libreadline-dev librw-dev libsqlite3-dev libssl-dev libsuitesparse-dev libsymmetrica2-dev libz-dev libzmq3-dev libzn-poly-dev m4 make nauty openssl palp pari-doc pari-elldata pari-galdata pari-galpol pari-gp2c pari-seadata patch perl pkg-config planarity ppl-dev python3 python3 python3-distutils r-base-dev r-cran-lattice sqlite3 sympow tachyon tar xcas xz-utils yasm
 
 # wget https://www.mirrorservice.org/sites/www.sagemath.org/src/sage-9.4.tar.gz 
