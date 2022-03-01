@@ -21,7 +21,7 @@ export DEBIAN_FRONTEND=noninteractive; \
 apt install -y software-properties-common
 apt-get install -y software-properties-common
 
-add-apt-repository -y ppa:deadsnakes/ppa ppa:pypy/ppa
+add-apt-repository -y ppa:deadsnakes/ppa
 apt-get install -y python3.10 python3.10-distutils libpython3.10-dev
 
 curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
@@ -32,8 +32,6 @@ apt-get install -y \
     libmpc-dev \
     pypy3 \
     gdb \
-    # sagemath-common \
-    # sagemath \
     nmap \
     binwalk \
     nasm \
@@ -41,29 +39,35 @@ apt-get install -y \
     net-tools \
     radare2 \
     exif \
-    cython \
-    swig \
-    cmake \
     pandoc \
-    pylint
+    pylint \
+    flake8
 
 apt install -y \
-    fzf \
+    swig \
+    cmake \
+    cython
+
+curl -sS  https://bootstrap.pypa.io/pip/3.6/get-pip.py | pypy3
+
+apt install -y \
     ripgrep \
     universal-ctags \
     silversearcher-ag \
-    fd-find \
-    pygmentize
+    fd-find 
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
 
 apt-get install -y pandoc \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-xetex
 
-apt-get install -y docker \
-      docker-compose \
-      # default-jre \
-      # default-jdk \
+# apt-get install -y docker \
+#       docker-compose \
+#       default-jre \
+#       default-jdk \
       # maven \
       # gradle \
       # firefox \
@@ -73,6 +77,7 @@ apt-get install -y docker \
       # freeglut3-dev \
       # ffmpeg \
       # timidity \
+      # python-tk
 
 
 
@@ -93,18 +98,19 @@ python3.10 -m pip install tqdm \
       scipy \
       sklearn \
       virtualenv \
+      pysat \
+      pysmt \
       autopep8
 
 # python3.10 -m pip install \
 #     nltk \
 #     youtube-dl \
 #     pygame \
-#     tkinter \
-#     python-tk \
+#     tk \
 #     PySimpleGUI \
 #     tensorflow \
-#     torch \
-#     torchvision \
+#     # torch \
+#     # torchvision \
 #     faker \
 #     # wslwinreg \ 
 #     bitarray \
@@ -117,31 +123,31 @@ python3.10 -m pip install tqdm \
 #     django
 
 
-pypy3 -m pip install \
-    tqdm \
-    z3-solver \
-    sympy \
-    pycryptodome \
-    numpy \
-    pillow \
-    pysmt \
-    python-sat
+# pypy3 -m pip install \
+#     tqdm \
+#     z3-solver \
+#     sympy \
+#     pycryptodome \
+#     numpy \
+#     pillow \
+#     pysmt \
 
 # pysmt-install --msat --confirm-agreement
-# pysmt-install --cvc4 --confirm-agreement
+
 # pysmt-install --yices --confirm-agreement
 # pysmt-install --btor --confirm-agreement
 # pysmt-install --picosat --confirm-agreement
 # pysmt-install --bdd --confirm-agreement
+
 # docker pull hyperreality/cryptohack
 # docker pull razaborg/rsactftool
-# docker pull cyrilbouvier/cado-nfs.py`
+# docker pull cyrilbouvier/cado-nfs.py
 
 # pushd .dotfiles
-# cp -r .bashrc .gdbinit .vimrc .inputrc .tmux.conf install.sh peda ~
+# cp -r .bashrc .gdbinit .vimrc .inputrc .tmux.conf peda ~
 # popd 
 
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 # vim +PluginInstall +qall
 
 
@@ -154,3 +160,24 @@ pypy3 -m pip install \
 # MAKE='make -j15' make
 # ./configure && make
 # ln -s $(pwd)/sage /usr/bin/sage
+
+# wsl2 cuda
+# distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+# curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+# curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+# sudo apt-get install -y nvidia-docker2
+# wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-wsl-ubuntu-11-4-local_11.4.0-1_amd64.deb
+# wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+# sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+# wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-wsl-ubuntu-11-4-local_11.4.0-1_amd64.deb
+# sudo dpkg -i cuda-repo-wsl-ubuntu-11-4-local_11.4.0-1_amd64.deb
+# sudo apt-key add /var/cuda-repo-wsl-ubuntu-11-4-local/7fa2af80.pub
+# sudo apt-get update
+# sudo apt-get -y install cuda
+# sudo apt-get install zlib1g
+
+# libcudnn8_8.2.4.15-1+cuda11.4_amd64.deb and libcudnn8-dev_8.2.4.15-1+cuda11.4_amd64.deb in ~
+# sudo dpkg -i libcudnn8_8.2.4.15-1+cuda11.4_amd64.deb
+# sudo dpkg -i libcudnn8-dev_8.2.4.15-1+cuda11.4_amd64.deb
+# sudo apt-get update
+# sudo apt-get install libcudnn8=8.2.4.15-1+cuda11.4
