@@ -137,7 +137,7 @@ Plugin 'junegunn/vim-easy-align'
 
 " Better vim-diffs
 Plugin 'chrisbra/vim-diff-enhanced'
-
+Plugin 'jremmen/vim-ripgrep'
 
 call vundle#end()
 
