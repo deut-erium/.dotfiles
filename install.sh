@@ -41,7 +41,9 @@ apt-get install -y \
     exif \
     pandoc \
     pylint \
-    flake8
+    flake8 \
+    gmpy2 \
+    nodejs
 
 apt install -y \
     swig \
@@ -100,7 +102,8 @@ python3.10 -m pip install tqdm \
       virtualenv \
       pysat \
       pysmt \
-      autopep8
+      autopep8 \
+      ortools
 
 # python3.10 -m pip install \
 #     nltk \
@@ -120,7 +123,8 @@ python3.10 -m pip install tqdm \
 #     bokeh \
 #     selenium \
 #     holoviews \
-#     django
+#     django \
+#     mtp
 
 
 # pypy3 -m pip install \
