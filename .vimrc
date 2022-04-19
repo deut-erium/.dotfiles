@@ -87,8 +87,8 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent cindent smartindent
 set mouse=a
 
-" toggling paste with leader pp
-map <leader>pp :setlocal paste!<cr>
+" toggling paste with leader ll
+set pastetoggle=<leader>pp
 set incsearch
 set hlsearch
 
@@ -126,8 +126,11 @@ set synmaxcol=0
 set cursorline
 set sidescroll =5
 " keep number of lines above and below
-set scrolloff  =4
+set scrolloff  =6
 " 
+
+set splitright
+set splitbelow
 
 " jumping without no write since last change
 set hidden
@@ -174,16 +177,31 @@ endif
 
     " color theme
     Plugin 'NLKNguyen/papercolor-theme'
+
+    " . repeat behavior
+    Plugin 'tpope/vim-repeat'
+    
+    " rainbow parenthesis
+    Plugin 'frazrepo/vim-rainbow'
+
+    Plugin 'vim-scripts/DrawIt' " ascii drawing vim
+
+    Plugin 'vim-scripts/ZoomWin' " zoom into windows vim
+    
+    Plugin 'vim-scripts/YankRing.vim' " maintains a list of yanks
+
 call vundle#end()
 
 set background=dark
 colorscheme PaperColor
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
+" dont check actively by default
+let g:syntastic_mode_map = {'mode':'passive'}
 
 
 "" Display checker-name for that error-message
@@ -195,7 +213,9 @@ let g:syntastic_python_checkers=['flake8', 'python3']
 
 filetype plugin indent on
 
-let mapleader = "," " map leader to comma
+let mapleader = " " " map leader to space
+
+
 
 function! ToggleLineNumber()
     if v:version > 703
@@ -214,10 +234,28 @@ function! ToggleLineNumber()
 endfunction
 
 
-highlight ColorColumn ctermbg=LightGray
+highlight ColorColumn ctermbg=Black
 call matchadd('ColorColumn','\%81v',100)
 
-map <leader>r :call ToggleLineNumber()<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>r :Rg<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+ "file history
+nnoremap <silent> <leader>h :History<CR> 
+ "command history
+nnoremap <silent> <leader>c :History:<CR> 
+ "search history
+nnoremap <silent> <leader>/ :History/<CR> 
+nnoremap <silent> <leader>t :Tags<CR>
+ "Lines in loaded buffer
+nnoremap <silent> <leader>l :Lines<CR> 
+ "delete buffer
+nnoremap <silent> <leader>d :bd<CR> 
+nnoremap <silent> <leader>sc :SyntasticCheck<CR> 
+nnoremap <silent> <leader>st :SyntasticToggleMode<CR> 
+nnoremap <silent> <leader>sr :SyntasticReset<CR> 
+
+map <leader>n :call ToggleLineNumber()<CR>
 set number
 set relativenumber
 " set background=dark

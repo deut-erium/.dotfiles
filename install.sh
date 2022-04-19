@@ -43,7 +43,10 @@ apt-get install -y \
     pylint \
     flake8 \
     gmpy2 \
-    nodejs
+    nodejs \
+    cargo \
+    numba \
+    golang-go
 
 apt install -y \
     swig \
@@ -56,7 +59,7 @@ apt install -y \
     ripgrep \
     universal-ctags \
     silversearcher-ag \
-    fd-find 
+    fd-find
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
@@ -83,7 +86,7 @@ apt-get install -y pandoc \
 
 
 
-        
+
 
 python3.10 -m pip install tqdm \
       z3-solver \
@@ -115,7 +118,7 @@ python3.10 -m pip install tqdm \
 #     # torch \
 #     # torchvision \
 #     faker \
-#     # wslwinreg \ 
+#     # wslwinreg \
 #     bitarray \
 #     scikit-opt \
 #     protobuf \
@@ -149,16 +152,16 @@ python3.10 -m pip install tqdm \
 
 # pushd .dotfiles
 # cp -r .bashrc .gdbinit .vimrc .inputrc .tmux.conf peda ~
-# popd 
+# popd
 
-#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+#git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # vim +PluginInstall +qall
 
 
 # sagemath stuff
 # apt-get install -y bc binutils bzip2 ca-certificates cliquer curl eclib-tools fflas-ffpack flintqs g++ g++ gcc gcc gfan gfortran glpk-utils gmp-ecm lcalc libatomic-ops-dev libboost-dev libbraiding-dev libbrial-dev libbrial-groebner-dev libbz2-dev libcdd-dev libcdd-tools libcliquer-dev libcurl4-openssl-dev libec-dev libecm-dev libffi-dev libflint-arb-dev libflint-dev libfreetype6-dev libgc-dev libgd-dev libgf2x-dev libgiac-dev libgivaro-dev libglpk-dev libgmp-dev libgsl-dev libhomfly-dev libiml-dev liblfunction-dev liblrcalc-dev liblzma-dev libm4rie-dev libmpc-dev libmpfi-dev libmpfr-dev libncurses5-dev libntl-dev libopenblas-dev libpari-dev libpcre3-dev libplanarity-dev libppl-dev libpython3-dev libreadline-dev librw-dev libsqlite3-dev libssl-dev libsuitesparse-dev libsymmetrica2-dev libz-dev libzmq3-dev libzn-poly-dev m4 make nauty openssl palp pari-doc pari-elldata pari-galdata pari-galpol pari-gp2c pari-seadata patch perl pkg-config planarity ppl-dev python3 python3 python3-distutils r-base-dev r-cran-lattice sqlite3 sympow tachyon tar xcas xz-utils yasm
 
-# wget https://www.mirrorservice.org/sites/www.sagemath.org/src/sage-9.4.tar.gz 
+# wget https://www.mirrorservice.org/sites/www.sagemath.org/src/sage-9.4.tar.gz
 # tar -xvf sage-9.4.tar.gz
 # cd sage-9.4/
 # MAKE='make -j15' make
