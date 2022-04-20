@@ -190,10 +190,14 @@ endif
     
     Plugin 'vim-scripts/YankRing.vim' " maintains a list of yanks
 
+    Plugin 'vim-scripts/taglist.vim'
+
 call vundle#end()
 
 set background=dark
 colorscheme PaperColor
+
+let g:Tlist_Use_Right_Window = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -255,9 +259,13 @@ nnoremap <silent> <leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <leader>st :SyntasticToggleMode<CR> 
 nnoremap <silent> <leader>sr :SyntasticReset<CR> 
 
+nnoremap <silent> <leader>tl :TlistToggle<CR>
+
+
+
 map <leader>n :call ToggleLineNumber()<CR>
-set number
-set relativenumber
+" set number
+" set relativenumber
 " set background=dark
 " colorscheme PaperColor
 
@@ -300,6 +308,8 @@ endfun
 
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage :call CleanExtraSpaces()
+    autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal nu
+    autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal relativenumber
 endif
 
 nnoremap <C-H> :Hexmode<CR>
