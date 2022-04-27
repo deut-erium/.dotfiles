@@ -24,6 +24,9 @@ apt-get install -y software-properties-common
 add-apt-repository -y ppa:deadsnakes/ppa
 apt-get install -y python3.10 python3.10-distutils libpython3.10-dev
 
+# for vim 8.2
+sudo add-apt-repository ppa:jonathonf/vim
+
 curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
 
 apt-get install -y \
@@ -44,6 +47,7 @@ apt-get install -y \
     flake8 \
     gmpy2 \
     nodejs \
+    npm \
     cargo \
     numba \
     golang-go
@@ -61,8 +65,6 @@ apt install -y \
     silversearcher-ag \
     fd-find
 
-ln -s $(which fdfind) ~/.local/bin/fd
-
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
@@ -70,6 +72,11 @@ apt-get install -y pandoc \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-xetex
+
+apt-get install -y clangd
+go get golang.org/x/tools/golps
+pip install python-language-server
+
 
 # apt-get install -y docker \
 #       docker-compose \

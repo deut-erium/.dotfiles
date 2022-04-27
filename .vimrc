@@ -87,8 +87,6 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent cindent smartindent
 set mouse=a
 
-" toggling paste with leader ll
-set pastetoggle=<leader>pp
 set incsearch
 set hlsearch
 
@@ -192,13 +190,39 @@ endif
 
     Plugin 'vim-scripts/taglist.vim'
 
+    " vim latex 
+    Plugin 'lervag/vimtex'
+
+    " snippets
+    Plugin 'sirver/ultisnips'
+
+    Plugin 'jayli/vim-easycomplete'
+
+    Plugin 'prabirshrestha/vim-lsp'
+
 call vundle#end()
 
 set background=dark
 colorscheme PaperColor
 
+" ultisnips
+let g:UltiSnipsExpandTrigger = '<`>'
+let g:UltiSnipsJumpForwardTrigger = '<`>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-`>'
+let g:UltiSnipSnippetsDir = "~/.dotfiles/vim-snippets/"
+
+
+" vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+" taglist
 let g:Tlist_Use_Right_Window = 1
 
+" syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -241,6 +265,12 @@ endfunction
 highlight ColorColumn ctermbg=Black
 call matchadd('ColorColumn','\%81v',100)
 
+" toggling paste with leader ll
+nnoremap <leader>pp :set invpaste<CR>
+nnoremap <leader>so :source ~/.vimrc<CR>
+nnoremap <leader>se :e ~/.vimrc<CR>
+
+
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>r :Rg<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
@@ -260,6 +290,14 @@ nnoremap <silent> <leader>st :SyntasticToggleMode<CR>
 nnoremap <silent> <leader>sr :SyntasticReset<CR> 
 
 nnoremap <silent> <leader>tl :TlistToggle<CR>
+
+" easycomplete 
+nnoremap <silent> <leader>ee :EasyCompleteEnable<CR>
+" call :EasyCompleteDisable 
+nnoremap <silent> <leader>ed :EasyCompleteDisable<CR>
+nnoremap <silent> <leader>er :EasyCompleteReference<CR>
+nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR>
+au BufEnter * :EasyCompleteDisable
 
 
 
