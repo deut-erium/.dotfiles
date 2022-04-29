@@ -298,6 +298,7 @@ nnoremap <silent> <leader>ed :EasyCompleteDisable<CR>
 nnoremap <silent> <leader>er :EasyCompleteReference<CR>
 nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR>
 au BufEnter * :EasyCompleteDisable
+au BufEnter *.cpp,*.c,*.h :EasyCompleteEnable
 
 
 
@@ -355,6 +356,43 @@ inoremap <C-H> <Esc>:Hexmode<CR>
 vnoremap <C-H> :<C-U>Hexmode<CR>
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()
+
+if has("cscope")
+    " use both cscope and ctag
+    set cscopetag
+
+    " check cscope definition before ctags
+    set csto=0
+
+    " add any cscope db in curr dir
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    
+    " show message when cscope db added
+    set cscopeverbose
+
+    "   's'   symbol: find all references to the token under cursor
+    "   'g'   global: find global definition(s) of the token under cursor
+    "   'c'   calls:  find all calls to the function name under cursor
+    "   't'   text:   find all instances of the text under cursor
+    "   'e'   egrep:  egrep search for the word under cursor
+    "   'f'   file:   open the filename under cursor
+    "   'i'   includes: find files that include the filename under cursor
+    "   'd'   called: find functions that function under cursor calls
+
+    nmap <leader>cs :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <leader>cg :cs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <leader>ct :cs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <leader>ce :cs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <leader>cf :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <leader>ci :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <leader>cd :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+endif
 
 " helper function to toggle hex mode
 function ToggleHex()
