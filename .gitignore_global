@@ -1,0 +1,12 @@
+tags
+.DS_Store
+*.log
+
+# python
+__pycache__/
+
+.env
+env/
+venv/
+ENV
+

@@ -1,0 +1,10 @@
+[user]
+	email = himanshuthesheoran@gmail.com
+	name = deut-erium
+
+[core]
+    editor = vim
+    excludesFile = ~/.gitignore_global
+
+[credential]
+	helper = cache --timeout=86400

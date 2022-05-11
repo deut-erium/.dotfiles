@@ -206,10 +206,11 @@ set background=dark
 colorscheme PaperColor
 
 " ultisnips
-let g:UltiSnipsExpandTrigger = '<`>'
-let g:UltiSnipsJumpForwardTrigger = '<`>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-`>'
-let g:UltiSnipSnippetsDir = "~/.dotfiles/vim-snippets/"
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.dotfiles/snippets/','UltiSnips','vim-snippets']
+let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME.'/.dotfiles/snippets'
 
 
 " vimtex
@@ -225,7 +226,7 @@ let g:Tlist_Use_Right_Window = 1
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
 " dont check actively by default
@@ -289,6 +290,8 @@ nnoremap <silent> <leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <leader>st :SyntasticToggleMode<CR> 
 nnoremap <silent> <leader>sr :SyntasticReset<CR> 
 
+nnoremap <silent> <leader>ss :Snippets<CR>
+
 nnoremap <silent> <leader>tl :TlistToggle<CR>
 
 " easycomplete 
@@ -297,8 +300,26 @@ nnoremap <silent> <leader>ee :EasyCompleteEnable<CR>
 nnoremap <silent> <leader>ed :EasyCompleteDisable<CR>
 nnoremap <silent> <leader>er :EasyCompleteReference<CR>
 nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR>
-au BufEnter * :EasyCompleteDisable
-au BufEnter *.cpp,*.c,*.h :EasyCompleteEnable
+
+" lazy
+nnoremap <silent> <leader>dp :diffput<CR>
+nnoremap <silent> <leader>dg :diffget<CR>
+nnoremap <silent> <leader>dd :diffupdate<CR>
+
+function! DisableEasyComplete()
+    :EasyCompleteDisable
+endfun
+
+function! DisableCompletionOnlyFirstOpen()
+    if !exists('b:has_been_entered')
+        let b:has_been_entered = 1
+        call DisableEasyComplete()
+    endif
+endfun
+
+
+au BufEnter * call DisableCompletionOnlyFirstOpen()
+au BufNew *.cpp,*.c,*.h :EasyCompleteEnable
 
 
 
