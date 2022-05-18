@@ -71,7 +71,9 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-set clipboard=exclude:.*
+" set clipboard=exclude:.*
+set clipboard=unnamedplus
+
 " tabcompletion
 function! Tab_Or_Complete()
   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
@@ -222,6 +224,7 @@ let g:tex_conceal='abdmg'
 
 " taglist
 let g:Tlist_Use_Right_Window = 1
+let g:Tlist_WinWidth = 40
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -278,7 +281,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
  "file history
 nnoremap <silent> <leader>h :History<CR> 
  "command history
-nnoremap <silent> <leader>c :History:<CR> 
+nnoremap <silent> <leader>: :History:<CR> 
  "search history
 nnoremap <silent> <leader>/ :History/<CR> 
 nnoremap <silent> <leader>t :Tags<CR>
@@ -317,13 +320,47 @@ function! DisableCompletionOnlyFirstOpen()
     endif
 endfun
 
-
 au BufEnter * call DisableCompletionOnlyFirstOpen()
 au BufNew *.cpp,*.c,*.h :EasyCompleteEnable
 
 
 
 map <leader>n :call ToggleLineNumber()<CR>
+
+set clipboard=unnamedplus
+if system('uname -a | egrep [Mm]icrosoft') != ''
+ let g:lastyank = 'y'
+ if executable('win32yank.exe')
+    let g:copy = 'win32yank.exe -i --crlf'
+    let g:paste = 'win32yank.exe -o --lf'
+ elseif exists('$DISPLAY') && executable('xclip')
+    let g:copy = 'xclip -i -selection clipboard'
+    let g:paste = 'xclip -o -selection clipboard'
+ else
+    let g:copy = 'clip.exe'
+    let g:paste = 'powershell.exe Get-Clipboard'
+ endif
+ augroup myYank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator == 'y' | call system(g:copy, @") | let g:lastyank='y' | else | let g:lastyank='' | endif
+ augroup END
+ function! Paste(mode)
+    if g:lastyank == 'y'
+     let @" = system(g:paste)
+    endif
+    return a:mode
+ endfunction
+ map <expr> p Paste('p')
+ map <expr> P Paste('P')
+ func! GetSelectedText()
+    normal gv"xy
+    let result = getreg("x")
+    return result
+ endfunc
+endif
+
+
+
 " set number
 " set relativenumber
 " set background=dark

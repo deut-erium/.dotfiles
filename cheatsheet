@@ -1,3 +1,52 @@
+# MAPS
+<leader> = " "
+
+## Leader commands
+pp - invpaste
+so - source vimrc
+se - edit vimrc
+d  - buffer delete
+dp - diffput
+dg - diffget
+dd - diffpudate
+n  - toggle line number
+
+### fzf
+f  - :Files
+r  - :Rg
+b  - :Buffers
+h  - :History
+:  - :History: command history
+/  - :History/ search history
+t  - :Tags
+l  - :Lines
+
+### syntastic
+sc - :SyntasticCheck
+st - :SyntasticToggleMode
+sr - :SyntasticReset
+
+### snippets
+ss - :Snippets (search)
+tl - :TlistToggle 
+
+### easycomplete
+ee - :EasyCompleteEnable
+ed - :EasycompleteDisable
+er - :references
+eg - :gotodefinition
+
+### cscope
+cs - cscope find symbol
+cg - global
+cc - calls
+ct - text
+ce - egrep
+cf - filename under cursor
+ci - includes
+cd - called functions
+
+
 #HELP
 : TAB - Cycle through possible command completions
 : CTRL-d list possible command completitons
@@ -150,9 +199,3 @@ f find window
 :save-buffer buf.txt
 :delete-buffer -b 1
 
-
-
-
-
-
-~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ~                                                 
