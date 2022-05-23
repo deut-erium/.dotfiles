@@ -54,6 +54,10 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+set listchars=tab:▸\ ,eol:¬
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+
 
 if has("gui_running")
     set guioptions-=T
@@ -97,9 +101,6 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 filetype off
 
-autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead *.py,*.sage set nocindent
-autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
 
 " setting path to include all
 set path+=**
@@ -153,10 +154,9 @@ endif
     Plugin 'preservim/nerdtree'
     Plugin 'gmarik/vim-markdown'
     Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-fugitive'
 
     Plugin 'tpope/vim-commentary'
-    autocmd FileType python setlocal commentstring=#\ %s
-    au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
 
     " Plugin 'klen/python-mode'
     Plugin 'junegunn/fzf.vim'
@@ -196,7 +196,7 @@ endif
     Plugin 'lervag/vimtex'
 
     " snippets
-    Plugin 'sirver/ultisnips'
+    Plugin 'SirVer/ultisnips'
 
     Plugin 'jayli/vim-easycomplete'
 
@@ -208,7 +208,7 @@ set background=dark
 colorscheme PaperColor
 
 " ultisnips
-let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsExpandTrigger = '<leader><tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.dotfiles/snippets/','UltiSnips','vim-snippets']
@@ -293,7 +293,7 @@ nnoremap <silent> <leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <leader>st :SyntasticToggleMode<CR> 
 nnoremap <silent> <leader>sr :SyntasticReset<CR> 
 
-nnoremap <silent> <leader>ss :Snippets<CR>
+nnoremap <silent> <leader>sl :Snippets<CR>
 
 nnoremap <silent> <leader>tl :TlistToggle<CR>
 
@@ -319,9 +319,6 @@ function! DisableCompletionOnlyFirstOpen()
         call DisableEasyComplete()
     endif
 endfun
-
-au BufEnter * call DisableCompletionOnlyFirstOpen()
-au BufNew *.cpp,*.c,*.h :EasyCompleteEnable
 
 
 
@@ -406,9 +403,15 @@ fun!CleanExtraSpaces()
 endfun
 
 if has("autocmd")
+    autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+    autocmd BufRead *.py,*.sage set nocindent
+    autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
+    autocmd FileType python setlocal commentstring=#\ %s
+    au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage :call CleanExtraSpaces()
     autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal nu
     autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal relativenumber
+    au BufEnter * call DisableCompletionOnlyFirstOpen()
 endif
 
 nnoremap <C-H> :Hexmode<CR>
