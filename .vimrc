@@ -357,6 +357,8 @@ if system('uname -a | egrep [Mm]icrosoft') != ''
     let result = getreg("x")
     return result
  endfunc
+ noremap <leader>c :call system(g:copy, GetSelectedText()())<CR>
+ noremap <leader>x :call system(g:copy, GetSelectedText()())<CR>gvx
 endif
 
 

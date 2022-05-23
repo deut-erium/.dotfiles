@@ -170,6 +170,18 @@ cmd_devenv() {
     cmd.exe /v /c @ "${VC_DEVENV}" "&&" "$@"
 }
 
+md2pdf() {
+    pandoc $1 -o $2 --highlight-style tango \
+        --pdf-engine xelatex \
+        --listings -H ~/.dotfiles/templates/listings-setup.tex
+}
+
+vdf() {
+    vimdiff ~/$1 ~/.dotfiles/$1
+}
+
+
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
 # fzf ctrl-r and alt-c behavior
 if [ -d "$HOME/.local/bin" ] ; then

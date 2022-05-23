@@ -91,7 +91,9 @@ pip install python-language-server
       # freeglut3-dev \
       # ffmpeg \
       # timidity \
-      # python-tk
+      # python-tk \
+      # jekyll \
+      # ruby
 
 
 
@@ -116,6 +118,9 @@ python3.10 -m pip install tqdm \
       pysmt \
       autopep8 \
       ortools
+
+
+# gem install jgd  #jekyll-github-deploy
 
 # python3.10 -m pip install \
 #     nltk \

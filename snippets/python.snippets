@@ -1,0 +1,32 @@
+snippet pwnimports "pwnimports" b
+from pwn import remote, re, context
+from Crypto.Util.number import long_to_bytes, bytes_to_long
+context.
+HOST, PORT = "", 
+
+REM = remote(HOST, PORT)
+endsnippet
+
+snippet all_smt "all_smt" 
+def all_smt(s, initial_terms):
+    def block_term(s, m, t):
+        s.add(t != m.eval(t))
+    def fix_term(s, m, t):
+        s.add(t == m.eval(t))
+    def all_smt_rec(terms):
+        if sat == s.check():
+           m = s.model()
+           yield m
+           for i in range(len(terms)):
+               s.push()
+               block_term(s, m, terms[i])
+               for j in range(i):
+                   fix_term(s, m, terms[j])
+               yield from all_smt_rec(terms[i:])
+               s.pop()   
+    yield from all_smt_rec(list(initial_terms)) 
+endsnippet
+
+snippet bitvecvector "vector of bitvectors" w
+${1:x} = [BitVec('${1:x}_{}'.format(i), ${2:32}) for i in range(${3:10})]
+endsnippet
