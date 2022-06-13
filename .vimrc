@@ -47,6 +47,8 @@ set showmatch
 " how many tenths of a second to blink when matching brackets
 set mat=2
 
+set timeoutlen=500
+
 " enable syntax highlighting
 syntax enable
 
@@ -347,8 +349,8 @@ if system('uname -a | egrep [Mm]icrosoft') != ''
     endif
     return a:mode
  endfunction
- map <expr> p Paste('p')
- map <expr> P Paste('P')
+ " map <expr> p Paste('p')
+ " map <expr> P Paste('P')
  func! GetSelectedText()
     normal gv"xy
     let result = getreg("x")
@@ -406,8 +408,9 @@ if has("autocmd")
     autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
     autocmd BufRead *.py,*.sage set nocindent
     autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
-    autocmd FileType python setlocal commentstring=#\ %s
     au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
+    au BufNewFile,BUfRead,BufReadPost *.sage setlocal commentstring=#\ %s
+    autocmd FileType python setlocal commentstring=#\ %s
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage :call CleanExtraSpaces()
     autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal nu
     autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal relativenumber

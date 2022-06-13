@@ -1,13 +1,39 @@
-snippet pwnimports "pwnimports" b
+snippet pwni "pwnimports" b
 from pwn import remote, re, context
+import string
+CHARSET = string.printable[:94].encode()
 from Crypto.Util.number import long_to_bytes, bytes_to_long
-context.
+import hashlib
+context.log_level = 20
 HOST, PORT = "", 
 
 REM = remote(HOST, PORT)
 endsnippet
 
-snippet all_smt "all_smt" 
+snippet explore "exploration headers" b
+from collections import *
+from functools import *
+from itertools import *im
+from tqdm import tqdm
+from pprint import pprint
+from tqdm import tqdm, trange
+from array import array
+import bisect
+import math
+import sys
+import os
+import statistics
+import base64
+endsnippet
+
+
+snippet bvec "vector of bitvector" b
+${1:title} = [BitVec(f'${1:title}_\{i\}',${2:32}) for i in range(${3:10})]
+endsnippet
+
+
+
+snippet all_smt "all_smt" w
 def all_smt(s, initial_terms):
     def block_term(s, m, t):
         s.add(t != m.eval(t))
@@ -27,6 +53,42 @@ def all_smt(s, initial_terms):
     yield from all_smt_rec(list(initial_terms)) 
 endsnippet
 
-snippet bitvecvector "vector of bitvectors" w
-${1:x} = [BitVec('${1:x}_{}'.format(i), ${2:32}) for i in range(${3:10})]
+snippet all_ortools "callback class for ortools" w
+class Solver_Callback(cp_model.CpSolverSolutionCallback):
+    def __init__(self, variables, solution_limit=float('inf')):
+        cp_model.CpSolverSolutionCallback.__init__(self)
+        self.__variables = variables
+        self.__solution_count = 0
+        self.__solutions = []
+        self.__solution_limit = solution_limit
+
+    def on_solution_callback(self):
+        self.__solution_count+=1
+        solution = []
+        for v in self.__variables:
+            # print('%s=%i' % (v, self.Value(v)), end=' ')
+            solution.append(self.Value(v))
+        self.__solutions.append(solution)
+        print()
+        if self.__solution_count >= self.__solution_limit:
+            self.StopSearch()
+
+    def solution_count(self):
+        return self.__solution_count
+
+    def solutions(self):
+        return self.__solutions
+model = cp_model.CpModel()
+variables = [model.NewIntVar(0,10,'x')]
+model.Add()
+solver = cp_model.CpSolver()
+solver_callback = Solver_Callback(variables)
+solver.parameters.enumerate_all_solutions = True
+solver.parameters.max_time_in_seconds = 60.0
+status = solver.Solve(model, solver_callback)
+if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+    solutions = solver_callback.solutions()
 endsnippet
+
+
+
