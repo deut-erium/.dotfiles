@@ -59,6 +59,7 @@ endif
 set listchars=tab:▸\ ,eol:¬
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
+set list
 
 
 if has("gui_running")
@@ -165,7 +166,7 @@ endif
     Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plugin 'tpope/vim-obsession'
 
-    Plugin 'wlangstroth/vim-racket'
+    " Plugin 'wlangstroth/vim-racket'
 
     " Plugin 'vim-scripts/indentpython.vim'
     Plugin 'vim-syntastic/syntastic'
@@ -195,16 +196,22 @@ endif
     Plugin 'vim-scripts/taglist.vim'
 
     " vim latex 
-    Plugin 'lervag/vimtex'
+    " Plugin 'lervag/vimtex'
 
     " snippets
     Plugin 'SirVer/ultisnips'
 
     Plugin 'jayli/vim-easycomplete'
 
-    Plugin 'prabirshrestha/vim-lsp'
+    " Plugin 'prabirshrestha/vim-lsp'
+
+    Plugin 'rhysd/vim-grammarous'
+
 
 call vundle#end()
+
+" add rainbow parenthesis
+let g:rainbow_active = 1
 
 set background=dark
 colorscheme PaperColor
@@ -268,10 +275,38 @@ function! ToggleLineNumber()
 endfunction
 
 
+function! ToggleCopyMode()
+    if !exists('b:copyToggled')
+        let b:listset = &list
+        let b:nuset = &number
+        let b:relset = &relativenumber
+        set nolist
+        set nonu
+        set norelativenumber
+        call ZoomWin()
+        let b:copyToggled = 1
+    else
+        if b:nuset
+            set nu
+        endif
+        if b:listset
+            set list
+        endif
+        if b:relset
+            set relativenumber
+        endif
+        call ZoomWin()
+        unlet b:copyToggled
+    endif
+endfunction
+
 highlight ColorColumn ctermbg=Black
 call matchadd('ColorColumn','\%81v',100)
 
 " toggling paste with leader ll
+nnoremap <leader>yy :call ToggleCopyMode()<CR>
+nnoremap <leader>yr :YRShow<CR>
+nnoremap <leader>?  :split ~/vimbinds<CR>
 nnoremap <leader>pp :set invpaste<CR>
 nnoremap <leader>so :source ~/.vimrc<CR>
 nnoremap <leader>se :e ~/.vimrc<CR>
@@ -310,6 +345,9 @@ nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR>
 nnoremap <silent> <leader>dp :diffput<CR>
 nnoremap <silent> <leader>dg :diffget<CR>
 nnoremap <silent> <leader>dd :diffupdate<CR>
+
+nnoremap <silent> <leader>ge :GrammarousCheck<CR>
+nnoremap <silent> <leader>gd :GrammarousReset<CR>
 
 function! DisableEasyComplete()
     :EasyCompleteDisable
@@ -356,8 +394,8 @@ if system('uname -a | egrep [Mm]icrosoft') != ''
     let result = getreg("x")
     return result
  endfunc
- noremap <leader>c :call system(g:copy, GetSelectedText()())<CR>
- noremap <leader>x :call system(g:copy, GetSelectedText()())<CR>gvx
+ noremap <leader>c :call system(g:copy, GetSelectedText())<CR>
+ noremap <leader>x :call system(g:copy, GetSelectedText())<CR>gvx
 endif
 
 
@@ -403,6 +441,8 @@ fun!CleanExtraSpaces()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfun
+
+
 
 if has("autocmd")
     autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
