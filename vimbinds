@@ -8,7 +8,9 @@
 | source vimrc                                                | <leader> so   |
 | edit vimrc                                                  | <leader> se   |
 | search file names                                           | <leader> f    |
-| ripgrep strings                                             | <leader> r    |
+| ripgrep strings   all                                       | <leader> r    |
+| ripgrep strings   all binaries unrestricted                 | <leader> rb   |
+| ripgrep strings   c project files                           | <leader> rc   |
 | search buffer names                                         | <leader> b    |
 | search file history                                         | <leader> h    |
 | search tags                                                 | <leader> t    |

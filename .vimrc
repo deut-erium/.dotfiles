@@ -210,6 +210,16 @@ endif
 
 call vundle#end()
 
+
+" fzf settings
+" prevent rg to search in file names
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -g '!{**/node_modules/*,**/.git/*,tags}'".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --glob '!{**/tags,**/.git/*,**/.svn/*,**/dist/*,**/cscope.out,**/kits/*,**/Debug/*,**/Release/*,**/x64/*,**/ipch/*,*.pdb,*.ilk}' ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rgb call fzf#vim#grep("rg --binary --byte-offset --unrestricted ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+command! -bang -nargs=* Rgc call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --glob '{*.h,*.c,*.cpp,*.rc,*.bat,*.vcxproj,*.wixproj,*.filters,*.txt,*.rc,*.py,*.hpp,*.sln,*.ruleset,*.template,*.ini,*.css,*.def,*.inf,*.json,*.ps1,*.html,*.props,*.wxs,*.md,*.xml,*.json}' ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+
 " add rainbow parenthesis
 let g:rainbow_active = 1
 
@@ -314,6 +324,8 @@ nnoremap <leader>se :e ~/.vimrc<CR>
 
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>r :Rg<CR>
+nnoremap <silent> <leader>rc :Rgc<CR>
+nnoremap <silent> <leader>rb :Rgb<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
  "file history
 nnoremap <silent> <leader>h :History<CR> 
