@@ -78,47 +78,102 @@ function Install-Latest-SVN {
 }
 
 function Install-Python-And-Setup {
-    $pythonUrl = "https://www.python.org/ftp/python/3.6.7/python-3.6.7-amd64.exe"
-    $installer = "$env:temp\python3.6.7.exe"
-    Write-Host "Downloading Python 3.6.7 Installer"
+    param (
+            $pythonVersion
+          )
+    $pythonUrl = "https://www.python.org/ftp/python/$pythonVersion/python-$pythonVersion-amd64.exe"
+    $installer = "$env:temp\python.exe"
+    Write-Host "Downloading $pythonVersion Installer"
     Invoke-WebRequest -Uri $pythonUrl -Outfile $installer
 	Write-Host "Disabling Path length limit"
 	Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -value 1
     Write-Host "Installing Python"
-	Start-Process $installer -ArgumentList "/quiet InstallAllUsers=1 TargetDir=""C:\Python3.6.7"" CompileAll=1 PrependPath=1 SimpleInstall=1" -Wait
-	Start-Process C:\Python3.6.7\python.exe -ArgumentList "-m pip install pip==9.0.1" -Wait
+	# Start-Process $installer -ArgumentList "/quiet InstallAllUsers=1 TargetDir=""C:\Program Files\Python310"" CompileAll=1 PrependPath=1 SimpleInstall=1" -Wait
+	Start-Process $installer -ArgumentList "/quiet InstallAllUsers=1 CompileAll=1 PrependPath=1 SimpleInstall=1" -Wait
 	Remove-Item $installer
 }
 
-function EncryptStuff{
-    param (
-        $inputPath,
-        $outputPath
-    )
-    $AESCipher = New-Object System.Security.Cryptography.AesCryptoServiceProvider
-    $AESCipher.Key = [System.Convert]::FromBase64String("R29vZ2xlIGRyaXZlIHN1Y2tzISBCT09PT09PT09PISE=")
-    $AESCipher.IV = [System.Convert]::FromBase64String("bW9yZSBib29vb29vISEhIQ==")
-    $encryptor = $AESCipher.CreateEncryptor()
-    $fileContents = [System.IO.File]::ReadAllBytes("$pwd\$inputPath")
-    $encryptedContent = $encryptor.TransformFinalBlock($fileContents,0,$fileContents.Length)
-    Set-Content $outputPath -Value $encryptedContent -Encoding Byte
-    $AESCipher.Dispose()
+
+function Install-WindowsTerminal {
+    $hasWindowsTerminal = Get-AppPackage -Name "Microsoft.WindowsTerminal"
+    if(!$hasWindowsTerminal){
+        $wt_url = "https://api.github.com/repos/microsoft/Terminal/releases/latest"
+        $osversion = [environment]::OSVersion.Version
+        if ($osversion.Major -eq 10)
+        {
+            if ($osversion.Build -gt 22000)
+            {
+                $asset = Invoke-RestMethod -Method Get -Uri $wt_url | % assets | where name -like "*11*zip"
+            }
+            else 
+            {
+
+                $asset = Invoke-RestMethod -Method Get -Uri $wt_url | % assets | where name -like "*10*zip"
+            }
+            $installer_zip = "$env:temp\$($asset.name)"
+            Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $installer_zip
+            $installer = "$env:temp\windows_terminal"
+            Expand-Archive $installer_zip -DestinationPath $installer
+            $installer = ls $installer | where Extension -eq ".msixbundle"
+            Add-AppxPackage $installer
+        }
+    }
+    else
+    {
+        Write-Host "Windows Terminal Already Installed"
+    }
 }
 
-function DecryptStuff{
-    param (
-        $inputPath,
-        $outputPath
-    )
-    $AESCipher = New-Object System.Security.Cryptography.AesCryptoServiceProvider
-    $AESCipher.Key = [System.Convert]::FromBase64String("R29vZ2xlIGRyaXZlIHN1Y2tzISBCT09PT09PT09PISE=")
-    $AESCipher.IV = [System.Convert]::FromBase64String("bW9yZSBib29vb29vISEhIQ==")
-    $decryptor = $AESCipher.CreateDecryptor()
-    $fileContents = [System.IO.File]::ReadAllBytes("$pwd\$inputPath")
-    $decryptedContent = $decryptor.TransformFinalBlock($fileContents,0,$fileContents.Length)
-    Set-Content $outputPath -Value $decryptedContent -Encoding Byte
-    $AESCipher.Dispose()
+
+function Install-Winget {
+    $hasPackageManager = Get-AppPackage -name 'Microsoft.DesktopAppInstaller'
+
+    if(!$hasPackageManager)
+    {
+        Add-AppxPackage -Path 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+
+        $releases_url = 'https://api.github.com/repos/microsoft/winget-cli/releases/latest'
+
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $releases = Invoke-RestMethod -uri $releases_url
+        $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith('msixbundle') } | Select -First 1
+
+        "Installing winget from $($latestRelease.browser_download_url)"
+        Add-AppxPackage -Path $latestRelease.browser_download_url
+    }
+    else
+    {
+        Write-Host "Winget Already Installed"
+    }
 }
+
+$WingetPackages = @(
+        "wireshark", 
+        "powertoys", 
+        "nvim", 
+        "sysinternals suite", 
+        "windbg", 
+        "win-vind", 
+        "Microsoft.VisualStudioCode", 
+        "firefox",
+        "Nvidia.CUDA".
+        "Microsoft.WindowsSDK",
+        "Microsoft.WindowsWDK",
+        "Microsoft.VisualStudio.2022.Community",
+        "Miniconda3",
+        "Python 3.11",
+        )
+
+# for($i=0; $i -lt $WingetPackages.length; $i++)
+# {
+#     winget Install $WingetPackages[$i]
+# }
+
+# # Install ubuntu-20.04 on wsl
+# wsl --install -d "Ubuntu-20.04"
+
+
+
 
 # Check-Fix-DOM-Errors
 # Install-Latest-Git
