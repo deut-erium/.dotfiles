@@ -141,7 +141,11 @@ alias ccat='pygmentize -g'
 export PROMPT_DIRTRIM=2
 alias apep="autopep8 --in-place --aggressive --aggressive"
 alias vimtricks="vim ~/.dotfiles/cheatsheet"
-alias pwdd="pwd | clip.exe"
+alias pwdd="echo '\"'$(pwd)'\"' | clip.exe"
+pwdc (){
+    path=`wslpath -w "$(pwd)"`
+    echo '"'$path'"' | clip.exe
+}
 alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
 alias py3="python3.10"
 alias pp="python3.10 -m pip"
@@ -187,7 +191,7 @@ vdf() {
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-export FZF_DEFAULT_COMMAND="fd --hidden"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={**.git/*,**.svn/*,**/build/*,**/tmp/*}"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND – type d"
 export JEKYLL_ENV=deployment
