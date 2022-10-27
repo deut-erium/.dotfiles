@@ -1,0 +1,44 @@
+tqdm
+z3-solver
+sympy
+pwntools
+pycryptodome
+beautifulsoup4
+factordb-python
+grequests
+numpy
+pandas
+pillow
+matplotlib
+scipy
+sklearn
+virtualenv
+pysat
+pysmt
+scapy
+autopep8
+#ortools
+#cvc5
+
+
+protobuf
+nltk
+youtube-dl
+# django
+# bitarray
+# tk
+# selenium
+# mtp
+# flake8
+# pygame
+# hashpumpy
+# holoviews
+# PySimpleGUI
+# tensorflow
+# torch
+# torchvision
+# faker
+# wslwinreg
+# scikit-opt
+# hvplot
+# bokeh

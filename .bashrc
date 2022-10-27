@@ -175,9 +175,10 @@ cmd_devenv() {
 }
 
 md2pdf() {
-    pandoc $1 -o $2 --highlight-style tango \
-        --pdf-engine xelatex \
-        --listings -H ~/.dotfiles/templates/listings-setup.tex
+    pandoc $1 -o $2 --highlight-style=tango \
+        --pdf-engine=xelatex \
+        --listings -H ~/.dotfiles/templates/listings-setup.tex \
+        -H ~/.dotfiles/templates/math-setup.tex
 }
 
 vdf() {

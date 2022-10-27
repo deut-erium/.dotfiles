@@ -22,12 +22,15 @@ apt install -y software-properties-common
 apt-get install -y software-properties-common
 
 add-apt-repository -y ppa:deadsnakes/ppa
-apt-get install -y python3.10 python3.10-distutils libpython3.10-dev
+apt-get install -y python3.11 python3.11-distutils libpython3.11-dev
 
 # for vim 8.2
 sudo add-apt-repository ppa:jonathonf/vim
 
-curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+
+
+
 
 apt-get install -y \
     libgmp3-dev \
@@ -50,6 +53,7 @@ apt-get install -y \
     npm \
     cargo \
     numba \
+    libnetcdf-dev \
     golang-go
 
 apt install -y \
@@ -96,52 +100,11 @@ pip install python-language-server
       # ruby
 
 
-
-
-
-python3.10 -m pip install tqdm \
-      z3-solver \
-      sympy \
-      pwntools \
-      pycryptodome \
-      beautifulsoup4 \
-      factordb-python \
-      grequests \
-      numpy \
-      pandas \
-      pillow \
-      matplotlib \
-      scipy \
-      sklearn \
-      virtualenv \
-      pysat \
-      pysmt \
-      autopep8 \
-      ortools
+python3.11 -m pip install python-requirements.txt
 
 
 # gem install jgd  #jekyll-github-deploy
 
-# python3.10 -m pip install \
-#     nltk \
-#     youtube-dl \
-#     pygame \
-#     tk \
-#     PySimpleGUI \
-#     tensorflow \
-#     # torch \
-#     # torchvision \
-#     faker \
-#     # wslwinreg \
-#     bitarray \
-#     scikit-opt \
-#     protobuf \
-#     hvplot \
-#     bokeh \
-#     selenium \
-#     holoviews \
-#     django \
-#     mtp
 
 
 # pypy3 -m pip install \

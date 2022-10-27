@@ -222,6 +222,22 @@ command! -bang -nargs=* Rgc call fzf#vim#grep("rg --column --line-number --no-he
 
 " add rainbow parenthesis
 let g:rainbow_active = 1
+let g:rainbow_guifgs = [
+            \ 'brown',
+            \ 'darkgray',
+            \ 'darkgreen',
+            \ 'darkcyan',
+            \ 'darkred',
+            \ 'darkmagenta',
+            \ 'brown',
+            \ 'gray',
+            \ 'darkmagenta',
+            \ 'darkgreen',
+            \ 'darkcyan',
+            \ 'darkred',
+            \ 'red',
+            \ ]
+let g:rainblow_cterfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 
 set background=dark
 colorscheme PaperColor
