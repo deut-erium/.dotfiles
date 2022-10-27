@@ -147,8 +147,8 @@ pwdc (){
     echo '"'$path'"' | clip.exe
 }
 alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
-alias py3="python3.10"
-alias pp="python3.10 -m pip"
+alias py3="python3.11"
+alias pp="python3.11 -m pip"
 
 mid2mp3 () {
     # ffmpeg -i "$1" -vn -ab 128k -ar 44100 -y "${1%.mid}.mp3";
