@@ -207,6 +207,10 @@ endif
 
     Plugin 'rhysd/vim-grammarous'
 
+    Plugin 'rust-lang/rust.vim'
+
+    Plugin 'vim-scripts/a.vim'
+
 
 call vundle#end()
 
@@ -268,7 +272,15 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
 " dont check actively by default
-let g:syntastic_mode_map = {'mode':'passive'}
+" let g:syntastic_mode_map = {'mode':'passive'}
+let g:syntastic_mode_map = {'mode': 'passive',
+                            \ 'active_filetypes':['c','cpp'],
+                            \ 'passive_filetypes': ['python']}
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 
 
 "" Display checker-name for that error-message
@@ -282,6 +294,13 @@ filetype plugin indent on
 
 let mapleader = " " " map leader to space
 
+function! LintC()
+    !indent -bap -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -ts4 -nut %
+endfunction 
+
+function! Apep()
+    !autopep8 --in-place --aggressive --aggressive %
+endfunction
 
 
 function! ToggleLineNumber()
@@ -336,6 +355,8 @@ nnoremap <leader>?  :split ~/vimbinds<CR>
 nnoremap <leader>pp :set invpaste<CR>
 nnoremap <leader>so :source ~/.vimrc<CR>
 nnoremap <leader>se :e ~/.vimrc<CR>
+nnoremap <leader>lc :call LintC()<CR>
+nnoremap <leader>lp :call Apep()<CR>
 
 
 nnoremap <silent> <leader>f :Files<CR>

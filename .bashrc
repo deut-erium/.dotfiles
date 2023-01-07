@@ -185,6 +185,10 @@ vdf() {
     vimdiff ~/$1 ~/.dotfiles/$1
 }
 
+gcq() {
+    cppcheck --enable=all --std=c99 --suppress=missingIncludeSystem $1
+    gcc -Wall -Wextra -Wpedantic -ggdb -fno-sanitize=all -fno-omit-frame-pointer -static-liblsan -lrt $1 -o ${1%%.*}
+}
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 

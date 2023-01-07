@@ -54,7 +54,9 @@ apt-get install -y \
     cargo \
     numba \
     libnetcdf-dev \
-    golang-go
+    golang-go \
+    cppcheck \
+    clang-tools
 
 apt install -y \
     swig \
