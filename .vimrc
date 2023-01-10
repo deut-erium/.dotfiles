@@ -37,6 +37,7 @@ set ignorecase
 set smartcase
 " dont redraw when executing macros (performance config)
 set lazyredraw
+set redrawtime=10000
 
 " set magic on for regex
 set magic
@@ -264,6 +265,8 @@ let g:tex_conceal='abdmg'
 " taglist
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_WinWidth = 40
+let tlist_cpp_settings = 'c++;c:class;f:function'
+let tlist_c_settings = 'c;f:function'
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
