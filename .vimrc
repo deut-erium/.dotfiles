@@ -212,6 +212,8 @@ endif
 
     Plugin 'vim-scripts/a.vim'
 
+    Plugin 'qpkorr/vim-bufkill'
+
 
 call vundle#end()
 
@@ -274,16 +276,30 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
+" let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_remove_include_errors = 1
 " dont check actively by default
 " let g:syntastic_mode_map = {'mode':'passive'}
 let g:syntastic_mode_map = {'mode': 'passive',
                             \ 'active_filetypes':['c','cpp'],
                             \ 'passive_filetypes': ['python']}
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'obsession', 'mode', 'paste'],
+      \             [ 'readonly', 'filename', 'modified', 'charvaluehex', 'syntasticstatus'] ]
+      \ },
+      \ 'component': {
+      \   'charvaluehex': '0x%B',
+      \ },
+      \ 'component_function': {
+      \   'syntasticstatus': 'SyntasticStatuslineFlag',
+      \   'obsession': 'ObsessionStatus',
+      \ },
+      \ }
 
 
 "" Display checker-name for that error-message
@@ -400,6 +416,10 @@ nnoremap <silent> <leader>dd :diffupdate<CR>
 
 nnoremap <silent> <leader>ge :GrammarousCheck<CR>
 nnoremap <silent> <leader>gd :GrammarousReset<CR>
+nnoremap <silent> <leader>d :BD<CR>
+nnoremap <silent> <leader>j :BB<CR>
+nnoremap <silent> <leader>k :BF<CR>
+
 
 function! DisableEasyComplete()
     :EasyCompleteDisable
