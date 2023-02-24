@@ -50,6 +50,12 @@ set mat=2
 
 set timeoutlen=500
 
+" save all marks (f1) for 1000 files
+set viminfo='1000,f1
+
+" Resize split when window is resized
+au VimResized * :wincmd =
+
 " enable syntax highlighting
 syntax enable
 
@@ -214,6 +220,8 @@ endif
 
     Plugin 'qpkorr/vim-bufkill'
 
+    Plugin 'ledesmablt/vim-run'
+
 
 call vundle#end()
 
@@ -301,6 +309,12 @@ let g:lightline = {
       \ },
       \ }
 
+let g:vim_run_command_map = {
+  \'python': 'python3.9',
+  \'bash': 'bash',
+  \}
+":Run yourcommand - runs selected command 
+" '<,'>RunVisual - run commands from selected lines
 
 "" Display checker-name for that error-message
 let g:syntastic_aggregate_errors = 1
