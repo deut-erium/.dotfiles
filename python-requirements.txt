@@ -4,7 +4,6 @@ sympy
 pwntools
 pycryptodome
 beautifulsoup4
-factordb-python
 grequests
 numpy
 pandas
