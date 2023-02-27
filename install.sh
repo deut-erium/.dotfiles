@@ -21,9 +21,7 @@ export DEBIAN_FRONTEND=noninteractive; \
 apt install -y software-properties-common
 apt-get install -y software-properties-common
 
-pushd .dotfiles
 cp -r .bashrc .gdbinit .vimrc .inputrc .tmux.conf peda ~
-popd
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -70,7 +68,7 @@ apt install -y \
     cmake \
     cython
 
-curl -sS  https://bootstrap.pypa.io/pip/3.6/get-pip.py | pypy3
+curl -sS  https://bootstrap.pypa.io/pip/3.8/get-pip.py | pypy3
 
 apt install -y \
     ripgrep \
@@ -83,10 +81,10 @@ ln -s $(which fdfind) ~/.local/bin/fd
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
-apt-get install -y pandoc \
-   texlive-latex-base \
-   texlive-latex-extra \
-   texlive-xetex
+#apt-get install -y pandoc \
+#   texlive-latex-base \
+#   texlive-latex-extra \
+#   texlive-xetex
 
 apt-get install -y clangd
 go get golang.org/x/tools/golps
@@ -111,7 +109,7 @@ pip install python-language-server
       # ruby
 
 
-python3.11 -m pip install python-requirements.txt
+python3.11 -m pip install -r python-requirements.txt
 
 
 # gem install jgd  #jekyll-github-deploy
