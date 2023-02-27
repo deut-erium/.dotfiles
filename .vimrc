@@ -149,81 +149,83 @@ set title
 
 set foldmethod=manual
 " Vundle stuff
-if has('win64') || has("win32")
-    set shellslash
-    set rtp+=~/vimfiles/bundle/Vundle.vim
-    call vundle#begin('~/vimfiles/bundle')
-    set bs=2
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
+" if has('win64') || has("win32")
+"     set shellslash
+"     set rtp+=~/vimfiles/bundle/Vundle.vim
+"     call vundle#begin('~/vimfiles/bundle')
+"     set bs=2
+" else
+"     set rtp+=~/.vim/bundle/Vundle.vim
+"     call vundle#begin()
+" endif
 
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'itchyny/lightline.vim'
-    Plugin 'preservim/nerdtree'
-    Plugin 'gmarik/vim-markdown'
-    Plugin 'tpope/vim-surround'
-    Plugin 'tpope/vim-fugitive'
+call plug#begin()
+    Plug 'gmarik/Vundle.vim'
+    Plug 'itchyny/lightline.vim'
+    Plug 'preservim/nerdtree'
+    Plug 'gmarik/vim-markdown'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive'
 
-    Plugin 'tpope/vim-commentary'
+    Plug 'tpope/vim-commentary'
 
-    " Plugin 'klen/python-mode'
-    Plugin 'junegunn/fzf.vim'
-    Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plugin 'tpope/vim-obsession'
+    " Plug 'klen/python-mode'
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'tpope/vim-obsession'
 
-    " Plugin 'wlangstroth/vim-racket'
+    " Plug 'wlangstroth/vim-racket'
 
-    " Plugin 'vim-scripts/indentpython.vim'
-    Plugin 'vim-syntastic/syntastic'
+    " Plug 'vim-scripts/indentpython.vim'
+    Plug 'vim-syntastic/syntastic'
     " for displaying num search results
-    Plugin 'google/vim-searchindex'
+    Plug 'google/vim-searchindex'
     " for usual code alignment stuff
-    Plugin 'junegunn/vim-easy-align'
+    Plug 'junegunn/vim-easy-align'
 
     " Better vim-diffs
-    Plugin 'chrisbra/vim-diff-enhanced'
+    Plug 'chrisbra/vim-diff-enhanced'
 
     " color theme
-    Plugin 'NLKNguyen/papercolor-theme'
+    Plug 'NLKNguyen/papercolor-theme'
 
     " . repeat behavior
-    Plugin 'tpope/vim-repeat'
+    Plug 'tpope/vim-repeat'
     
     " rainbow parenthesis
-    Plugin 'frazrepo/vim-rainbow'
+    Plug 'frazrepo/vim-rainbow'
 
-    Plugin 'vim-scripts/DrawIt' " ascii drawing vim
+    Plug 'vim-scripts/DrawIt' " ascii drawing vim
 
-    Plugin 'vim-scripts/ZoomWin' " zoom into windows vim
+    Plug 'vim-scripts/ZoomWin' " zoom into windows vim
     
-    Plugin 'vim-scripts/YankRing.vim' " maintains a list of yanks
+    Plug 'vim-scripts/YankRing.vim' " maintains a list of yanks
 
-    Plugin 'vim-scripts/taglist.vim'
+    Plug 'vim-scripts/taglist.vim'
 
     " vim latex 
-    " Plugin 'lervag/vimtex'
+    " Plug 'lervag/vimtex'
 
     " snippets
-    Plugin 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips'
 
-    Plugin 'jayli/vim-easycomplete'
+    Plug 'jayli/vim-easycomplete'
 
-    " Plugin 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/vim-lsp'
 
-    Plugin 'rhysd/vim-grammarous'
+    Plug 'rhysd/vim-grammarous'
 
-    Plugin 'rust-lang/rust.vim'
+    Plug 'rust-lang/rust.vim'
 
-    Plugin 'vim-scripts/a.vim'
+    Plug 'vim-scripts/a.vim'
 
-    Plugin 'qpkorr/vim-bufkill'
+    Plug 'qpkorr/vim-bufkill'
 
-    Plugin 'ledesmablt/vim-run'
+    Plug 'ledesmablt/vim-run'
 
+call plug#end()
 
-call vundle#end()
+" call vundle#end()
 
 
 " fzf settings
