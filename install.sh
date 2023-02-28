@@ -63,7 +63,8 @@ apt-get install -y \
     libnetcdf-dev \
     golang-go \
     cppcheck \
-    clang-tools
+    clang-tools \
+    cscope
 
 apt install -y \
     swig \
