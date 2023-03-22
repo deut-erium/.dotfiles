@@ -217,7 +217,7 @@ call plug#begin()
 
     Plug 'rust-lang/rust.vim'
 
-    Plug 'vim-scripts/a.vim'
+    Plug 'vim-scripts/a.vim', { 'for': ['cpp', 'c', 'h'] }
 
     Plug 'qpkorr/vim-bufkill'
 
