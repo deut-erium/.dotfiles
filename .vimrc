@@ -223,6 +223,8 @@ call plug#begin()
 
     Plug 'ledesmablt/vim-run'
 
+    Plug 'preservim/vimux'
+
 call plug#end()
 
 " call vundle#end()
@@ -481,6 +483,19 @@ nnoremap <silent> <leader>ck :cprev<CR>
 nnoremap <silent> <leader>vj ]c<CR>:echo DiffCount()<CR>
 nnoremap <silent> <leader>vk [c<CR>:echo DiffCount()<CR>
 
+function! VimuxSlime()
+    call VimuxRunCommand(@v, 0)
+endfunction
+
+let g:VimuxPromptString = ": ?"
+" let g:VimuxOrientation = "h"
+
+" vmap <Leader>vs "vy :call VimuxSlime()<CR>
+" nnoremap <Leader>vp :VimuxPromptCommand<CR>
+" nnoremap <Leader>vl :VimuxRunLastCommand<CR>
+" nnoremap <Leader>vi :VimuxInspectRunner<CR>
+" nnoremap <Leader>vq :VimuxCloseRunner<CR>
+" nnoremap <Leader>vz :VimuxZoomRunner<CR>
 
 
 function! DisableEasyComplete()
