@@ -223,6 +223,8 @@ call plug#begin()
 
     Plug 'ledesmablt/vim-run'
 
+    Plug 's3rvac/AutoFenc'
+
     Plug 'preservim/vimux'
 
 call plug#end()
@@ -490,12 +492,12 @@ endfunction
 let g:VimuxPromptString = ": ?"
 " let g:VimuxOrientation = "h"
 
-" vmap <Leader>vs "vy :call VimuxSlime()<CR>
-" nnoremap <Leader>vp :VimuxPromptCommand<CR>
-" nnoremap <Leader>vl :VimuxRunLastCommand<CR>
-" nnoremap <Leader>vi :VimuxInspectRunner<CR>
-" nnoremap <Leader>vq :VimuxCloseRunner<CR>
-" nnoremap <Leader>vz :VimuxZoomRunner<CR>
+vmap <Leader>vs "vy :call VimuxSlime()<CR>
+nnoremap <Leader>vp :VimuxPromptCommand<CR>
+nnoremap <Leader>vl :VimuxRunLastCommand<CR>
+nnoremap <Leader>vi :VimuxInspectRunner<CR>
+nnoremap <Leader>vq :VimuxCloseRunner<CR>
+nnoremap <Leader>vz :VimuxZoomRunner<CR>
 
 
 function! DisableEasyComplete()
