@@ -482,8 +482,10 @@ nnoremap <silent> <leader>k :BF<CR>
 
 nnoremap <silent> <leader>cj :cnext<CR>
 nnoremap <silent> <leader>ck :cprev<CR>
-nnoremap <silent> <leader>vj ]c<CR>:echo DiffCount()<CR>
-nnoremap <silent> <leader>vk [c<CR>:echo DiffCount()<CR>
+" nnoremap <silent> <leader>vj ]c<CR>:echo DiffCount()<CR>
+" nnoremap <silent> <leader>vk [c<CR>:echo DiffCount()<CR>
+nnoremap <silent> <leader>x :call ToggleHex()<CR>
+nnoremap <silent> <leader>xx :call ToggleHex(1)<CR>
 
 function! VimuxSlime()
     call VimuxRunCommand(@v, 0)
@@ -608,11 +610,11 @@ if has("autocmd")
     au BufEnter * call DisableCompletionOnlyFirstOpen()
 endif
 
-nnoremap <C-H> :Hexmode<CR>
-inoremap <C-H> <Esc>:Hexmode<CR>
-vnoremap <C-H> :<C-U>Hexmode<CR>
+" nnoremap <C-H> :Hexmode<CR>
+" inoremap <C-H> <Esc>:Hexmode<CR>
+" vnoremap <C-H> :<C-U>Hexmode<CR>
 " ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
+" command -bar Hexmode call ToggleHex()
 
 if has("cscope")
     " use both cscope and ctag
@@ -651,8 +653,19 @@ if has("cscope")
 
 endif
 
+function! RemoveControl()
+    :%s/[[:cntrl:]]//g
+endfunction
+
+function! RemoveNonPrint()
+    :%s/[^[:print:]]//g
+endfunction
+
+
+
+
 " helper function to toggle hex mode
-function ToggleHex()
+function ToggleHex(onlyhex=0)
   " hex mode should be considered a read-only operation
   " save values for modified and read-only for restoration later,
   " and clear the read-only flag for now
@@ -673,7 +686,11 @@ function ToggleHex()
     " set status
     let b:editHex=1
     " switch to hex editor
-    %!xxd
+    if a:onlyhex
+        %!xxd -p
+    else
+        %!xxd
+    endif
   else
     " restore old options
     let &ft=b:oldft
@@ -683,7 +700,11 @@ function ToggleHex()
     " set status
     let b:editHex=0
     " return to normal editing
-    %!xxd -r
+    if a:onlyhex
+        %!xxd -r -p
+    else
+        %!xxd -r
+    endif
   endif
   " restore values for modified and read only state
   let &mod=l:modified
