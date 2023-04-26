@@ -6,7 +6,10 @@ def info(type, value, tb):
       # device, so call the default hook
       sys.__excepthook__(type, value, tb)
    else:
-      import traceback, pdb
+      if 'traceback' not in sys.modules:
+          import traceback
+      if 'pdb' not in sys.modules:
+          import pdb
       # You are NOT in interactive mode; print the exception...
       traceback.print_exception(type, value, tb)
       print()

@@ -198,7 +198,10 @@ gcq() {
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={**.git/*,**.svn/*,**/build/*,**/tmp/*}"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND – type d"
 export JEKYLL_ENV=deployment
+export PYTHONSTARTUP=~/.dotfiles/.pythonrc
+export PYTHON_HISTORY_FILE=~/.dotfiles/.python_history
