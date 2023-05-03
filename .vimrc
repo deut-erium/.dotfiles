@@ -606,6 +606,29 @@ nnoremap <Leader>vq :VimuxCloseRunner<CR>
 nnoremap <Leader>vz :VimuxZoomRunner<CR>
 
 
+fu! SaveSess()
+    execute 'mksession! '. getcwd(). '/.session.vim'
+endfunction
+
+fu! RestoreSess()
+if filereadable(getcwd(). '/.session.vim')
+    execute 'so '. getcwd(). '/.session.vim'
+    if bufexists(1)
+        for l in range(1, bufnr('$'))
+            if bufwinnr(l) == -1
+                exec 'buffer '. l
+            endif
+        endfor
+    endif
+endif
+endfunction
+
+autocmd VimLeave * call SaveSess()
+autocmd VimEnter * nested call RestoreSess()
+
+
+
+
 function! DisableEasyComplete()
     :EasyCompleteDisable
 endfun
