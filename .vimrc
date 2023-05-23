@@ -237,11 +237,11 @@ call plug#end()
 " https://github.com/junegunn/fzf/wiki/Examples-(vim)
 
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-if exists('$TMUX')
-      let g:fzf_layout = { 'tmux': '-p90%,60%' }
-else
-      let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-endif
+" if exists('$TMUX')
+"       let g:fzf_layout = { 'tmux': '-p90%,60%' }
+" else
+"       let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" endif
 
 
 function! s:ag_to_qf(line)
@@ -605,23 +605,34 @@ nnoremap <Leader>vi :VimuxInspectRunner<CR>
 nnoremap <Leader>vq :VimuxCloseRunner<CR>
 nnoremap <Leader>vz :VimuxZoomRunner<CR>
 
-
-fu! SaveSess()
-    execute 'mksession! '. getcwd(). '/.session.vim'
-endfunction
-
-fu! RestoreSess()
-if filereadable(getcwd(). '/.session.vim')
-    execute 'so '. getcwd(). '/.session.vim'
-    if bufexists(1)
-        for l in range(1, bufnr('$'))
-            if bufwinnr(l) == -1
-                exec 'buffer '. l
-            endif
-        endfor
+function! SaveSess()
+    let session_dir = getcwd() . '/.vimsessions'
+    if !isdirectory(session_dir)
+        call mkdir(session_dir, "p")
     endif
-endif
+    execute 'mksession! ' . session_dir . '/' . expand('%:t') . '.vim'
 endfunction
+
+function! RestoreSess()
+    if &diff
+        return
+    endif
+    let session_file = getcwd() . '/.vimsessions/' . expand('%:t') . '.vim'
+    if filereadable(session_file)
+        execute 'source ' . session_file
+        if bufexists(1)
+            for l in range(1, bufnr('$'))
+                if bufwinnr(l) == -1
+                    exec 'buffer ' . l
+                endif
+            endfor
+        endif
+    endif
+    if argc() == 1
+        execute 'edit ' . argv()[0]
+    endif
+endfunction
+
 
 autocmd VimLeave * call SaveSess()
 autocmd VimEnter * nested call RestoreSess()
