@@ -4,6 +4,7 @@ tags
 
 # python
 __pycache__/
+.vimsessions/
 
 .env
 env/

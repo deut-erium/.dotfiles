@@ -59,9 +59,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] $(date +%T) \$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u:\w\  $ '
 fi
 unset color_prompt force_color_prompt
 
@@ -151,6 +151,9 @@ pwdc (){
 alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
 alias py3="python3.11"
 alias pp="python3.11 -m pip"
+alias fd="fdfind"
+
+
 
 mid2mp3 () {
     # ffmpeg -i "$1" -vn -ab 128k -ar 44100 -y "${1%.mid}.mp3";
@@ -192,6 +195,14 @@ gcq() {
     gcc -Wall -Wextra -Wpedantic -ggdb -fno-sanitize=all -fno-omit-frame-pointer -static-liblsan -lrt $1 -o ${1%%.*}
 }
 
+mux() {
+    pgrep -vx tmux > /dev/null && \
+    tmux new -d -s delete-me && \
+    tmux run-shell ~?.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
+    tmux kill-session -t delete-me && \
+    tmux attach || tmux attach
+}
+
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
 # fzf ctrl-r and alt-c behavior
@@ -199,7 +210,7 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={**.git/*,**.svn/*,**/build/*,**/tmp/*}"
+export FZF_DEFAULT_COMMAND="fdfind --type f --hidden --follow --exclude={**.git/*,**.svn/*,**/build/*,**/tmp/*}"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND – type d"
 export JEKYLL_ENV=deployment

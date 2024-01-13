@@ -1,3 +1,4 @@
+scriptencoding utf-8
 syntax on
 " autoread on buffer changed from outside
 set autoread
@@ -634,6 +635,19 @@ function! RestoreSess()
 endfunction
 
 
+function! DeleteBufferFromSession(bufname)
+    let session_dir = getcwd() . '/.vimsessions'
+    let session_file = session_dir . '/' . expand('%:t') . '.vim'
+    if filereadable(session_file)
+        execute 'source ' . session_file
+        let buffer_number = bufnr(a:bufname)
+        if buffer_number != -1
+            execute 'bdelete ' . buffer_number
+        endif
+        execute 'mksession! ' . session_file
+    endif
+endfunction
+command! -nargs=? DeleteBuffer call DeleteBufferFromSession(<q-args> != '' ? <q-args> : expand('%:p'))
 autocmd VimLeave * call SaveSess()
 autocmd VimEnter * nested call RestoreSess()
 
