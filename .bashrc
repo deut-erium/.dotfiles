@@ -156,37 +156,7 @@ alias fd="fdfind"
 alias so="source ~/.bashrc"
 
 
-
-mid2mp3 () {
-    # ffmpeg -i "$1" -vn -ab 128k -ar 44100 -y "${1%.mid}.mp3";
-    timidity "$1" -Ow -o - | ffmpeg -i - -acodec libmp3lame -ab 320k "${1%.mid}.mp3"
-}
-
-cmd() {
-  CMD=$1
-  shift;
-  ARGS=$@
-  WIN_PWD=`wslpath -w "$(pwd)"`
-  cmd.exe /c "pushd ${WIN_PWD} && ${CMD} ${ARGS}"
-}
-
-VSWHERE_PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe"
-VS_INSTALL_DIR=$("${VSWHERE_PATH}" -latest -property installationPath)
-VCVARS_BAT="${VS_INSTALL_DIR}\VC\Auxiliary\Build\vcvars64.bat"
-VC_DEVENV="${VS_INSTALL_DIR}\Common7\IDE\devenv.exe"
-cmd_vc() {
-    cmd.exe /V /C @ "${VCVARS_BAT}" "&&" "$@"
-}
-cmd_devenv() {
-    cmd.exe /v /c @ "${VC_DEVENV}" "&&" "$@"
-}
-
-md2pdf() {
-    pandoc $1 -o $2 --highlight-style=tango \
-        --pdf-engine=xelatex \
-        --listings -H ~/.dotfiles/templates/listings-setup.tex \
-        -H ~/.dotfiles/templates/math-setup.tex
-}
+alias so="source ~/.bashrc"
 
 vdf() {
     vimdiff ~/$1 ~/.dotfiles/$1
@@ -220,3 +190,5 @@ export PYTHONSTARTUP=~/.dotfiles/.pythonrc
 export PYTHON_HISTORY_FILE=~/.dotfiles/.python_history
 export EDITOR="vim"
 export HF_HUB_ENABLE_HF_TRANSFER=1
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
