@@ -141,7 +141,7 @@ $if mode=vi
 
 
     set keymap vi-insert
-    ":": vi-movement-mode
+    ";;": vi-movement-mode
     TAB: menu-complete
     # shift tab to menu complete backward
     "\e[Z": menu-complete-backward
