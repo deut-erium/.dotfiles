@@ -149,9 +149,10 @@ pwdc (){
     echo '"'$path'"' | clip.exe
 }
 alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
-alias py3="python3.11"
-alias pp="python3.11 -m pip"
+alias py3="python3.12"
+alias pp="python3.12 -m pip"
 alias fd="fdfind"
+alias so="source ~/.bashrc"
 
 
 
