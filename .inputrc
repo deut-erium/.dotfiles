@@ -13,10 +13,33 @@ set show-mode-in-prompt on
 #     4: steady underline
 #     5: blinking bar (xterm)
 #     6: steady bar (xterm)
+
+# distinguish between command and insert mode 
+# Prepend I to indicate insert mode and have blinking bar     
 set vi-ins-mode-string I\1\e[5 q\2
+# prepend C to indicate command mode and have a blinking block
 set vi-cmd-mode-string C\1\e[1 q\2
 set blink-matching-paren on
 
+# sets the readline to display possible completions using different colors
+# to indicate filetypes determined from env variable LC_COLORS
+set colored-stats on
+
+
+# Completions listed immediately instead of bell when completing word has more than one possible completion
+set show-all-if-ambiguous on
+
+set completion-ignore-case on
+set menu-complete-display-prefix on
+
+# Enables the display of only the first 5 unique characters from a group of file or directory name suggestions when you utilize tab-completion. 
+# If multiple entries share a long prefix, they will be condensed using ellipses, making it easier to locate and choose the desired item. 
+# Useful in directories containing many similarly named images or documents.
+set completion-prefix-display-length 5
+
+# Set the bell-style to be visible only i.e no audio played on command completion
+# can also be set to none
+set bell-style visible 
 
 
 $if mode=vi
@@ -130,6 +153,7 @@ $if mode=vi
     "ci:": "di:i"
     "ca:": "da:i"
 
+    # vim analogues of jumping to the start and end of a file
     "gg": beginning-of-history
     "G" : end-of-history
 
@@ -139,18 +163,17 @@ $if mode=vi
     # forward history search on down arrow
     "\e\e[B": history-search-forward
 
-
+    # settings to be changed in insert mode
     set keymap vi-insert
     ";;": vi-movement-mode
+    # using ;; to easily move to command mode from insert mode instead of going to press Escape key each time
+    # ;; as I find it relatively easily on the home row and it doesnt interfere with typing in insert mode
+    # as commands to come by with ;; are rare?
     TAB: menu-complete
     # shift tab to menu complete backward
     "\e[Z": menu-complete-backward
-    "\e\e[A": history-search-backward
-    "\e\e[B": history-search-forward
-# end vi mode settingss
+
+# end vi mode settings
 $endif
 
-set show-all-if-ambiguous on
-set completion-ignore-case on
-set menu-complete-display-prefix on
 
