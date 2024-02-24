@@ -16,9 +16,9 @@ set show-mode-in-prompt on
 
 # distinguish between command and insert mode 
 # Prepend I to indicate insert mode and have blinking bar     
-set vi-ins-mode-string I\1\e[5 q\2
+set vi-ins-mode-string "i"\1\e[5 q\2
 # prepend C to indicate command mode and have a blinking block
-set vi-cmd-mode-string C\1\e[1 q\2
+set vi-cmd-mode-string "C"\1\e[1 q\2
 set blink-matching-paren on
 
 # sets the readline to display possible completions using different colors

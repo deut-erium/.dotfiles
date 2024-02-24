@@ -26,7 +26,7 @@ else
 endif
 
 " set height of cmd bar
-set cmdheight=1
+set cmdheight=2
 
 " configure backspace to act the way it should
 set backspace=eol,start,indent
@@ -578,6 +578,12 @@ nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR>
 nnoremap <silent> <leader>dp :diffput<CR>
 nnoremap <silent> <leader>dg :diffget<CR>
 nnoremap <silent> <leader>dd :diffupdate<CR>
+
+nnoremap <silent> <leader>dgl :diffget LOCAL<CR>
+nnoremap <silent> <leader>dgr :diffget REMOTE<CR>
+nnoremap <silent> <leader>dgb :diffget BASE<CR>
+
+nnoremap <silent> <leader>nc /<<<<<<< <CR>
 
 nnoremap <silent> <leader>ge :GrammarousCheck<CR>
 nnoremap <silent> <leader>gd :GrammarousReset<CR>

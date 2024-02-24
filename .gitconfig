@@ -15,3 +15,22 @@
 
 [difftool]
 	prompt = false
+[merge]
+    tool = vimdiff
+    conflictstyle = zdiff3
+[mergetool]
+    prompt = false
+
+[alias]
+    fb = !fzf_prompt.sh
+    si = status -uno
+    lg = log --graph --abbrev-commit --decorate --date=format-local:'%Y-%m-%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) | $C(bold green)%ad%C(reset) %C(white)%s%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset)' --all -n a5
+    branches = "for-each-ref --sort=-committerdate refs/heads --format='%(authordate:short) %(color:yellow)%(objectname:short) %(color:green)%(refname:short)%(color:reset) (%(color:cyan)%(committerdate:relative)%(color:reset)) %(authorname)'"
+    branches-remote = "for-each-ref --sort=-committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:yellow)%(objectname:short) %(color:green)%(refname:short)%(color:reset) (%(color:cyan)%(committerdate:relative)%(color:reset)) %(authorname)'"
+
+[commit]
+    verbose = true
+[rerere]
+    enabled = true
+[push]
+    autoSetupRemote = true

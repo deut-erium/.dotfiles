@@ -121,6 +121,7 @@ fi
 
 # ctf-tools: gem install
 export PATH=$PATH:/bin
+export PATH=$PATH:/usr/local/cuda/bin
 rmd () {
           pandoc -t plain $1 | less
   }
@@ -218,3 +219,4 @@ export JEKYLL_ENV=deployment
 export PYTHONSTARTUP=~/.dotfiles/.pythonrc
 export PYTHON_HISTORY_FILE=~/.dotfiles/.python_history
 export EDITOR="vim"
+export HF_HUB_ENABLE_HF_TRANSFER=1
