@@ -157,6 +157,38 @@ alias so="source ~/.bashrc"
 
 
 alias so="source ~/.bashrc"
+mid2mp3 () {
+    # ffmpeg -i "$1" -vn -ab 128k -ar 44100 -y "${1%.mid}.mp3";
+    timidity "$1" -Ow -o - | ffmpeg -i - -acodec libmp3lame -ab 320k "${1%.mid}.mp3"
+}
+
+if grep -q microsoft /proc/version; then
+    cmd() {
+      CMD=$1
+      shift;
+      ARGS=$@
+      WIN_PWD=`wslpath -w "$(pwd)"`
+      cmd.exe /c "pushd ${WIN_PWD} && ${CMD} ${ARGS}"
+    }
+
+    VSWHERE_PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/Installer/vswhere.exe"
+    VS_INSTALL_DIR=$("${VSWHERE_PATH}" -latest -property installationPath)
+    VCVARS_BAT="${VS_INSTALL_DIR}\VC\Auxiliary\Build\vcvars64.bat"
+    VC_DEVENV="${VS_INSTALL_DIR}\Common7\IDE\devenv.exe"
+    cmd_vc() {
+        cmd.exe /V /C @ "${VCVARS_BAT}" "&&" "$@"
+    }
+    cmd_devenv() {
+        cmd.exe /v /c @ "${VC_DEVENV}" "&&" "$@"
+    }
+fi
+
+md2pdf() {
+    pandoc $1 -o $2 --highlight-style=tango \
+        --pdf-engine=xelatex \
+        --listings -H ~/.dotfiles/templates/listings-setup.tex \
+        -H ~/.dotfiles/templates/math-setup.tex
+}
 
 vdf() {
     vimdiff ~/$1 ~/.dotfiles/$1
@@ -173,6 +205,54 @@ mux() {
     tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
     tmux kill-session -t delete-me && \
     tmux attach || tmux attach
+}
+
+
+print_tree_with_content() {
+    local dir="$1"
+    local prefix="$2"
+
+    # List all files and directories in the current directory
+    for entry in "$dir"/*; do
+        if [ -d "$entry" ]; then
+            # If it's a directory, print the directory name and recurse
+            echo "${prefix}$(basename "$entry")/"
+            print_tree_with_content "$entry" "$prefix  "
+        elif [ -f "$entry" ]; then
+            # If it's a file, determine if it's binary or text
+            file_type=$(file --mime-type -b "$entry")
+            
+            echo "${prefix}- $(basename "$entry") :"
+            
+            if [[ "$file_type" == text/* ]]; then
+                # If it's a text file, print its content
+                sed 's/^/'"$prefix"'  /' "$entry"  # Indent file content
+            else
+                # If it's a binary file, produce a hexdump
+                hexdump -C "$entry" | sed 's/^/'"$prefix"'  /'  # Indent hexdump output
+            fi
+        fi
+    done
+}
+
+spawn_tmux_panes() {
+    local command="$1"
+    shift
+    local args=("$@")
+
+    # Iterate over each argument and create a new split window
+    for arg in "${args[@]}"; do
+        tmux split-window "$command $arg; bash"
+    done
+
+    # arrange the panes in a tiled layout
+    tmux select-layout tiled
+}
+
+# spawn_tmux_panes "echo" "arg1" "arg2" "arg3" ..
+
+gdf() {
+    git difftool $1^..$1
 }
 
 

@@ -97,6 +97,10 @@ call plug#begin()
 
     " multiple version control systems commands
     Plug 'vim-scripts/vcscommand.vim'
+
+    Plug 'preservim/tagbar'
+
+    Plug 'will133/vim-dirdiff'
 call plug#end()
 
 
