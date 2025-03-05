@@ -139,6 +139,9 @@ set autoindent cindent smartindent
 " Enable mouse support
 set mouse=a
 
+" enable mouse to drag splits inside tmux
+set ttymouse=xterm2
+
 " Enable incremental search
 set incsearch
 
@@ -215,74 +218,139 @@ highlight ColorColumn ctermbg=Black
 call matchadd('ColorColumn','\%81v',100)
 
 " Key mappings
-nnoremap <leader>yy :call ToggleCopyMode()<CR> " Toggle copy mode
-nnoremap <leader>yr :YRShow<CR> " Show yank history
-nnoremap <leader>?  :split ~/vimbinds<CR> " Open vimbinds file
-nnoremap <leader>pp :set invpaste<CR> " Toggle paste mode
-nnoremap <leader>so :source ~/.vimrc<CR> " Source vimrc
-nnoremap <leader>se :e ~/.vimrc<CR> " Edit vimrc
-nnoremap <leader>lc :call LintC()<CR> " Run indent on C code
-nnoremap <leader>lp :call Apep()<CR> " Run autopep8 on Python code
+"" Toggle copy mode
+nnoremap <leader>yy :call ToggleCopyMode()<CR> 
+" Show yank history
+nnoremap <leader>yr :YRShow<CR> 
+" Open vimbinds file
+nnoremap <leader>?  :split ~/vimbinds<CR> 
+" Toggle paste mode
+nnoremap <leader>pp :set invpaste<CR> 
+" Source vimrc
+nnoremap <leader>so :source ~/.vimrc<CR> 
+" Edit vimrc
+nnoremap <leader>se :e ~/.vimrc<CR> 
+" Run indent on C code
+nnoremap <leader>lc :call LintC()<CR> 
+" Run autopep8 on Python code
+nnoremap <leader>lp :call Apep()<CR> 
 
 
-nnoremap <leader>ld :LspDefinition<CR> " Go to definition
-nnoremap <leader>lr :LspReferences<CR> " Find references
+" Go to definition
+nnoremap <leader>ld :LspDefinition<CR> 
+" Find references
+nnoremap <leader>lr :LspReferences<CR> 
 
-nnoremap <silent> <leader>f :Files<CR> " Fuzzy search files
-nnoremap <silent> <leader>r :Rg<CR> " Fuzzy search with rg
-nnoremap <silent> <leader>rc :Rgc<CR> " Fuzzy search C/C++ files with rg
-nnoremap <silent> <leader>rb :Rgb<CR> " Fuzzy search binary files with rg
-nnoremap <silent> <leader>b :Buffers<CR> " Fuzzy search buffers
+" Fuzzy search files
+nnoremap <silent> <leader>f :Files<CR> 
+" Fuzzy search with rg
+nnoremap <silent> <leader>r :Rg<CR> 
+" Fuzzy search C/C++ files with rg
+nnoremap <silent> <leader>rc :Rgc<CR> 
+" Fuzzy search binary files with rg
+nnoremap <silent> <leader>rb :Rgb<CR> 
 
-nnoremap <silent> <leader>h :History<CR> " File history
-nnoremap <silent> <leader>: :History:<CR> " Command history
-nnoremap <silent> <leader>/ :History/<CR> " Search history
-nnoremap <silent> <leader>t :Tags<CR> " Fuzzy search tags
-nnoremap <silent> <leader>l :Lines<CR> " Fuzzy search lines in current buffer
-nnoremap <silent> <leader>d :bd<CR> " Delete buffer
+" Search current word under cursor
+nnoremap <silent> <leader>rg :Rgg<CR> 
+
+" Search recent searches
+nnoremap <silent> <leader>rr :FZFMru<CR> 
+
+" fuzzy search in neighbouring file
+nnoremap <silent> <leader>rn :FZFNeigh<CR>
+
+
+" Fuzzy search buffers
+nnoremap <silent> <leader>b :Buffers<CR> 
+
+" File history
+nnoremap <silent> <leader>h :History<CR> 
+" Command history
+nnoremap <silent> <leader>: :History:<CR> 
+" Search history
+nnoremap <silent> <leader>/ :History/<CR> 
+
+ " Fuzzy search tags
+nnoremap <silent> <leader>t :Tags<CR>  
+
+" current tag under cursor
+nnoremap <silent> <leader>tg :FzfTagsCurrWord<CR>  
+
+" Fuzzy search lines in current buffer
+nnoremap <silent> <leader>l :Lines<CR> 
+" Delete buffer
+nnoremap <silent> <leader>d :bd<CR> 
 
 
 
 
-nnoremap <silent> <leader>sc :SyntasticCheck<CR> " Run Syntastic check
-nnoremap <silent> <leader>st :SyntasticToggleMode<CR> " Toggle Syntastic mode
-nnoremap <silent> <leader>sr :SyntasticReset<CR> " Reset Syntastic
+" Run Syntastic check
+nnoremap <silent> <leader>sc :SyntasticCheck<CR> 
+" Toggle Syntastic mode
+nnoremap <silent> <leader>st :SyntasticToggleMode<CR> 
+" Reset Syntastic
+nnoremap <silent> <leader>sr :SyntasticReset<CR> 
 
-nnoremap <silent> <leader>sl :Snippets<CR> " Fuzzy search snippets
+" Fuzzy search snippets
+nnoremap <silent> <leader>sl :Snippets<CR> 
 
-nnoremap <silent> <leader>tl :TlistToggle<CR> " Toggle taglist
+" Toggle taglist
+nnoremap <silent> <leader>tl :TlistToggle<CR> 
+" Toggle Taglist
+nnoremap <silent> <leader>tb :TagbarToggle<CR>
+
 
 
 " easycomplete 
-nnoremap <silent> <leader>ee :EasyCompleteEnable<CR> " Enable EasyComplete
+"" Enable EasyComplete
+nnoremap <silent> <leader>ee :EasyCompleteEnable<CR> 
 
 " call :EasyCompleteDisable 
-nnoremap <silent> <leader>ed :EasyCompleteDisable<CR> " Disable EasyComplete
-nnoremap <silent> <leader>er :EasyCompleteReference<CR> " Find references with EasyComplete
-nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR> " Go to definition with EasyComplete
+"" Disable EasyComplete
+nnoremap <silent> <leader>ed :EasyCompleteDisable<CR> 
+" Find references with EasyComplete
+nnoremap <silent> <leader>er :EasyCompleteReference<CR> 
+" Go to definition with EasyComplete
+nnoremap <silent> <leader>eg :EasyCompleteGotoDefinition<CR> 
 
 " lazy
 
-nnoremap <silent> <leader>dp :diffput<CR> " Put diff changes
-nnoremap <silent> <leader>dg :diffget<CR> " Get diff changes
-nnoremap <silent> <leader>dd :diffupdate<CR> " Update diff
+" Put diff changes
+nnoremap <silent> <leader>dp :diffput<CR> 
+" Get diff changes
+nnoremap <silent> <leader>dg :diffget<CR> 
+" Update diff
+nnoremap <silent> <leader>dd :diffupdate<CR> 
 
-nnoremap <silent> <leader>dgl :diffget LOCAL<CR> " Get local diff changes
-nnoremap <silent> <leader>dgr :diffget REMOTE<CR> " Get remote diff changes
-nnoremap <silent> <leader>dgb :diffget BASE<CR> " Get base diff changes
+" Get local diff changes
+nnoremap <silent> <leader>dgl :diffget LOCAL<CR> 
+" Get remote diff changes
+nnoremap <silent> <leader>dgr :diffget REMOTE<CR> 
+" Get base diff changes
+nnoremap <silent> <leader>dgb :diffget BASE<CR> 
 
-nnoremap <silent> <leader>nc /<<<<<<< <CR> " Search for merge conflicts
-nnoremap <silent> <leader>ge :GrammarousCheck<CR> " Run Grammarous check
-nnoremap <silent> <leader>gd :GrammarousReset<CR> " Reset Grammarous
-nnoremap <silent> <leader>d :BD<CR> " Delete buffer
-nnoremap <silent> <leader>j :BB<CR> " Switch to previous buffer
-nnoremap <silent> <leader>k :BF<CR> " Switch to next buffer
-nnoremap <silent> <leader>cj :cnext<CR> " Jump to next error
-nnoremap <silent> <leader>ck :cprev<CR> " Jump to previous error
+" Search for merge conflicts
+nnoremap <silent> <leader>nc /<<<<<<< <CR> 
+" Run Grammarous check
+nnoremap <silent> <leader>ge :GrammarousCheck<CR> 
+" Reset Grammarous
+nnoremap <silent> <leader>gd :GrammarousReset<CR> 
+" Delete buffer
+nnoremap <silent> <leader>d :BD<CR> 
+" Switch to previous buffer
+nnoremap <silent> <leader>j :BB<CR> 
+" Switch to next buffer
+nnoremap <silent> <leader>k :BF<CR> 
+" Jump to next error
+nnoremap <silent> <leader>cj :cnext<CR> 
+" Jump to previous error
+nnoremap <silent> <leader>ck :cprev<CR> 
 " nnoremap <silent> <leader>vj ]c<CR>:echo DiffCount()<CR>
 " nnoremap <silent> <leader>vk [c<CR>:echo DiffCount()<CR>
-nnoremap <silent> <leader>x :call ToggleHex()<CR> " Toggle hex mode
-nnoremap <silent> <leader>xx :call ToggleHex(1)<CR> " Toggle hex mode (only hex)
+"" Toggle hex mode
+nnoremap <silent> <leader>x :call ToggleHex()<CR> 
+" Toggle hex mode (only hex)
+nnoremap <silent> <leader>xx :call ToggleHex(1)<CR> 
 
 " Vimux settings
 function! VimuxSlime()
@@ -371,11 +439,6 @@ endif
 
 " Autocommands
 if has("autocmd")
-    autocmd BufRead *.py,*.sage set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-    autocmd BufRead *.py,*.sage set nocindent
-    autocmd BufWritePre *.py,*.sage normal m`:%s/\s\+$//e ``
-    au BufNewFile,BUfRead,BufReadPost *.sage set syntax=python
-    au BufNewFile,BUfRead,BufReadPost *.sage setlocal commentstring=#\ %s
     autocmd FileType python setlocal commentstring=#\ %s
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage :call CleanExtraSpaces()
     autocmd BufRead,BufNewFile *.md,*.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.sage,*.c,*.h,*.cpp setlocal nu
@@ -426,5 +489,5 @@ call SourceIfExists("~/.dotfiles/vimrc_split/google_plugins.vim")
 call SourceIfExists("~/.dotfiles/vimrc_split/cscope.vim")
 call SourceIfExists("~/.dotfiles/vimrc_split/plugins.vim")
 if exists(':FZF')
-    call SourceIfExists("~/.dotfiles/vim_split/fzf_settings.vim")
+    call SourceIfExists("~/.dotfiles/vimrc_split/fzf_settings.vim")
 endif

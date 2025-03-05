@@ -29,12 +29,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +qall
 
 add-apt-repository -y ppa:deadsnakes/ppa
-apt-get install -y python3.11 python3.11-distutils libpython3.11-dev
+apt-get install -y python3.13 python3.13-distutils libpython3.13-dev
 
 # for vim 8.2
 sudo add-apt-repository ppa:jonathonf/vim
 
-curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.13
 
 
 apt-get install -y \
@@ -82,6 +82,9 @@ ln -s $(which fdfind) ~/.local/bin/fd
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #apt-get install -y pandoc \
 #   texlive-latex-base \
 #   texlive-latex-extra \

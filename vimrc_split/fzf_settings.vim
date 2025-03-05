@@ -107,6 +107,9 @@ function! s:fzf_neighbouring_files()
         \ 'window':  'enew' })
 endfunction
 
+
+command! FzfTagsCurrWord call fzf#vim#tags(expand('<cword>'))
+
 " Define a command ':FZFNeigh' for fuzzy searching neighboring files
 command! FZFNeigh call s:fzf_neighbouring_files()
 
@@ -114,8 +117,10 @@ command! FZFNeigh call s:fzf_neighbouring_files()
 " Rg for searching text files
 " Rgb to search even the binary files
 " Rgc for c/cpp specific files
+" Rgg for current word under cursor
 " command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -g '!{**/node_modules/*,**/.git/*,tags}'".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --glob '!{**/tags,**/.git/*,**/.svn/*,**/dist/*,**/cscope.out,**/kits/*,**/Debug/*,**/Release/*,**/x64/*,**/ipch/*,*.pdb,*.ilk}' ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 command! -bang -nargs=* Rgb call fzf#vim#grep("rg --binary --byte-offset --unrestricted ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 command! -bang -nargs=* Rgc call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --glob '{*.h,*.c,*.cpp,*.rc,*.bat,*.vcxproj,*.wixproj,*.filters,*.txt,*.rc,*.py,*.hpp,*.sln,*.ruleset,*.template,*.ini,*.css,*.def,*.inf,*.json,*.ps1,*.html,*.props,*.wxs,*.md,*.xml,*.json}' ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rgg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --glob '!{**/tags,**/.git/*,**/.svn/*,**/dist/*,**/cscope.out,**/kits/*,**/Debug/*,**/Release/*,**/x64/*,**/ipch/*,*.pdb,*.ilk}' ".shellescape(<q-args>), 1, {'options': '-q '.expand('<cword>')}, <bang>0)
 
