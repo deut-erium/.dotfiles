@@ -150,13 +150,12 @@ pwdc (){
     echo '"'$path'"' | clip.exe
 }
 alias yt-audio="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 320"
-alias py3="python3.12"
-alias pp="python3.12 -m pip"
+alias py3="python3.13"
+alias pp="python3.13 -m pip"
 alias fd="fdfind"
 alias so="source ~/.bashrc"
 
 
-alias so="source ~/.bashrc"
 
 vdf() {
     vimdiff ~/$1 ~/.dotfiles/$1
@@ -190,5 +189,20 @@ export PYTHONSTARTUP=~/.dotfiles/.pythonrc
 export PYTHON_HISTORY_FILE=~/.dotfiles/.python_history
 export EDITOR="vim"
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/dt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/dt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/dt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/dt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+bind -f ~/.inputrc
